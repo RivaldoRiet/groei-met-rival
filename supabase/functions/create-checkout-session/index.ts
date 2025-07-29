@@ -70,7 +70,7 @@ serve(async (req) => {
           price_data: {
             currency,
             product_data: {
-              name: description,
+              name: description || 'Social Media Service',
             },
             unit_amount: amount,
           },
@@ -80,6 +80,10 @@ serve(async (req) => {
       mode: 'payment',
       success_url: `${req.headers.get('origin')}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}`,
       cancel_url: `${req.headers.get('origin')}/`,
+      customer_update: {
+        name: 'never', // Don't ask for name since we have customer email
+        address: 'never', // Don't ask for address for digital services
+      },
       metadata: {
         orderId,
         user_email: userEmail,

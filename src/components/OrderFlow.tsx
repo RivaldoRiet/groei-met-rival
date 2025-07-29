@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -126,15 +127,25 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Label htmlFor="quantity">Hoeveelheid {service.unit}</Label>
-              <Input
-                id="quantity"
-                type="number"
-                min={service.minimum_order}
-                max={service.maximum_order}
-                value={quantity}
-                onChange={(e) => setQuantity(parseInt(e.target.value) || service.minimum_order)}
-                className="mt-1"
-              />
+              <div className="space-y-3 mt-2">
+                <Slider
+                  value={[quantity]}
+                  onValueChange={(value) => setQuantity(value[0])}
+                  min={service.minimum_order}
+                  max={service.maximum_order}
+                  step={Math.max(1, Math.floor((service.maximum_order - service.minimum_order) / 1000))}
+                  className="w-full"
+                />
+                <Input
+                  id="quantity"
+                  type="number"
+                  min={service.minimum_order}
+                  max={service.maximum_order}
+                  value={quantity}
+                  onChange={(e) => setQuantity(Math.min(service.maximum_order, Math.max(service.minimum_order, parseInt(e.target.value) || service.minimum_order)))}
+                  className="text-center font-medium"
+                />
+              </div>
               <p className="text-xs text-muted-foreground mt-1">
                 Min: {service.minimum_order.toLocaleString()}, Max: {service.maximum_order.toLocaleString()}
               </p>
