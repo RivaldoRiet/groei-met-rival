@@ -37,6 +37,7 @@ const ServiceDialog = ({ open, onClose }: ServiceDialogProps) => {
       );
     }
 
+    // Sort by popularity (services are already sorted in data file)
     setFilteredServices(filtered);
   }, [searchQuery, selectedPlatform]);
 
@@ -48,7 +49,7 @@ const ServiceDialog = ({ open, onClose }: ServiceDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-7xl max-h-[90vh] overflow-hidden flex flex-col">
-        <DialogHeader className="border-b pb-4">
+        <DialogHeader className="border-b pb-6">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-2xl font-bold">
               🚀 Kies je Social Media Services
@@ -58,38 +59,46 @@ const ServiceDialog = ({ open, onClose }: ServiceDialogProps) => {
             </Button>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            {/* Search */}
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={16} />
-              <Input
-                placeholder="Zoek services... (bijv. 'Instagram likes', 'YouTube views')"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-            
-            {/* Platform filter */}
-            <div className="flex gap-2 flex-wrap">
+          {/* Step 1: Platform Selection */}
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold mb-3">Stap 1: Kies je platform</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {platforms.map((platform) => (
-                <Badge
+                <Button
                   key={platform}
                   variant={selectedPlatform === platform ? "default" : "outline"}
-                  className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                  className="h-12 text-sm font-medium"
                   onClick={() => setSelectedPlatform(platform)}
                 >
                   {platform}
-                </Badge>
+                </Button>
               ))}
             </div>
-            
-            {(searchQuery || selectedPlatform !== "Alle") && (
-              <Button variant="outline" size="sm" onClick={resetFilters}>
-                Reset
-              </Button>
-            )}
           </div>
+
+          {/* Step 2: Search (only show when platform is selected) */}
+          {selectedPlatform !== "Alle" && (
+            <div className="mt-4">
+              <h3 className="text-sm font-medium mb-2 text-muted-foreground">Stap 2: Verfijn je zoekopdracht (optioneel)</h3>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={16} />
+                <Input
+                  placeholder={`Zoek binnen ${selectedPlatform} services...`}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+            </div>
+          )}
+          
+          {(searchQuery || selectedPlatform !== "Alle") && (
+            <div className="mt-4">
+              <Button variant="outline" size="sm" onClick={resetFilters}>
+                🔄 Alles resetten
+              </Button>
+            </div>
+          )}
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto p-6">
