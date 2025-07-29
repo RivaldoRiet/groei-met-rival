@@ -7,7 +7,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="bg-gradient-to-r from-primary to-primary-dark text-primary-foreground rounded-lg p-2 font-bold text-xl">
-                R
+                B
               </div>
               <div>
                 <h1 className="text-xl font-bold text-foreground">BoostDirect</h1>
@@ -19,7 +19,7 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Rival links */}
+          {/* BoostDirect links */}
           <div>
             <h3 className="font-semibold mb-4">BoostDirect</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
