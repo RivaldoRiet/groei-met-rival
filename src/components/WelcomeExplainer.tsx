@@ -22,7 +22,7 @@ const WelcomeExplainer = ({ onStartOrder }: WelcomeExplainerProps) => {
 
   const steps = [
     {
-      title: "Welkom bij Rival! 🚀",
+      title: "Welkom bij BoostDirect! 🚀",
       content: "Wij helpen je om je social media accounts te laten groeien met echte engagement en volgers.",
       icon: <Zap className="w-8 h-8 text-primary" />
     },

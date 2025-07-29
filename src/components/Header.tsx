@@ -72,7 +72,7 @@ const Header = () => {
               R
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-lg md:text-xl font-bold text-foreground">Rival</h1>
+              <h1 className="text-lg md:text-xl font-bold text-foreground">BoostDirect</h1>
               <p className="text-xs text-muted-foreground hidden md:block">Premium Social Media Marketing</p>
             </div>
           </Link>

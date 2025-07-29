@@ -3,13 +3,13 @@ const Testimonials = () => {
     {
       name: "Mike",
       role: "Zanger", 
-      content: "Dit was perfect!! Ik heb besteld bij andere sites, en vergeleken met hen is Rival zoveel beter. De plays hier zijn legitiem, van echte bronnen en de kijkers zijn daadwerkelijk gericht. Het grootste punt is echter dat wanneer je plays koopt, volgers zijn INBEGREPEN!! dus het ziet er extreem natuurlijk uit.",
+      content: "Dit was perfect!! Ik heb besteld bij andere sites, en vergeleken met hen is BoostDirect zoveel beter. De plays hier zijn legitiem, van echte bronnen en de kijkers zijn daadwerkelijk gericht. Het grootste punt is echter dat wanneer je plays koopt, volgers zijn INBEGREPEN!! dus het ziet er extreem natuurlijk uit.",
       avatar: "🎤"
     },
     {
       name: "Sarah",
       role: "Content Creator",
-      content: "Rival heeft mijn Instagram account volledig getransformeerd. De kwaliteit van de volgers is uitstekend en de groei ziet er volledig organisch uit. Ik ben super tevreden met de service!",
+      content: "BoostDirect heeft mijn Instagram account volledig getransformeerd. De kwaliteit van de volgers is uitstekend en de groei ziet er volledig organisch uit. Ik ben super tevreden met de service!",
       avatar: "📸"
     },
     {
@@ -28,7 +28,7 @@ const Testimonials = () => {
             Wat Onze Klanten Zeggen
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Bij Rival is klanttevredenheid ons ultieme doel. Zie wat Rival klanten te zeggen hebben over de verschillende services die wij hebben geleverd
+            Bij BoostDirect is klanttevredenheid ons ultieme doel. Zie wat BoostDirect klanten te zeggen hebben over de verschillende services die wij hebben geleverd
           </p>
         </div>
 

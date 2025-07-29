@@ -57,12 +57,12 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				rival: {
-					blue: 'hsl(var(--rival-blue))',
-					'blue-dark': 'hsl(var(--rival-blue-dark))',
-					'blue-light': 'hsl(var(--rival-blue-light))',
-					gray: 'hsl(var(--rival-gray))',
-					'gray-light': 'hsl(var(--rival-gray-light))'
+				boostdirect: {
+					blue: 'hsl(var(--boostdirect-blue))',
+					'blue-dark': 'hsl(var(--boostdirect-blue-dark))',
+					'blue-light': 'hsl(var(--boostdirect-blue-light))',
+					gray: 'hsl(var(--boostdirect-gray))',
+					'gray-light': 'hsl(var(--boostdirect-gray-light))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

@@ -13,7 +13,7 @@ const Statistics = () => {
     {
       number: "96.731",
       label: "Bestellingen Afgehandeld", 
-      color: "text-rival-blue"
+      color: "text-boostdirect-blue"
     }
   ];
 

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Rival Design System - Professional Social Media Marketing */
+/* BoostDirect Design System - Professional Social Media Marketing */
 
 @layer base {
   :root {
@@ -38,12 +38,12 @@
     --input: 214 32% 91%;
     --ring: 214 84% 56%;
 
-    /* Rival Brand Colors */
-    --rival-blue: 214 84% 56%;
-    --rival-blue-dark: 214 84% 46%;
-    --rival-blue-light: 214 100% 92%;
-    --rival-gray: 220 10% 50%;
-    --rival-gray-light: 210 20% 96%;
+    /* BoostDirect Brand Colors */
+    --boostdirect-blue: 214 84% 56%;
+    --boostdirect-blue-dark: 214 84% 46%;
+    --boostdirect-blue-light: 214 100% 92%;
+    --boostdirect-gray: 220 10% 50%;
+    --boostdirect-gray-light: 210 20% 96%;
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(214 84% 56%), hsl(214 84% 46%));

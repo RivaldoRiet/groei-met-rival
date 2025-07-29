@@ -10,7 +10,7 @@ const Footer = () => {
                 R
               </div>
               <div>
-                <h1 className="text-xl font-bold text-foreground">Rival</h1>
+                <h1 className="text-xl font-bold text-foreground">BoostDirect</h1>
                 <p className="text-xs text-muted-foreground">Premium Social Media Marketing</p>
               </div>
             </div>
@@ -21,7 +21,7 @@ const Footer = () => {
 
           {/* Rival links */}
           <div>
-            <h3 className="font-semibold mb-4">Rival</h3>
+            <h3 className="font-semibold mb-4">BoostDirect</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href="#" className="hover:text-primary transition-colors">Over Ons</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Nieuws</a></li>
@@ -37,7 +37,7 @@ const Footer = () => {
               <li><a href="#" className="hover:text-primary transition-colors">Services</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Rapportage</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Affiliate</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Rival Wallet</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">BoostDirect Wallet</a></li>
             </ul>
           </div>
 
@@ -56,7 +56,7 @@ const Footer = () => {
         {/* Contact info */}
         <div className="border-t border-border pt-8 mb-8">
           <div className="grid md:grid-cols-3 gap-4 text-sm text-muted-foreground">
-            <div>📧 support@rival.com</div>
+            <div>📧 support@boostdirect.nl</div>
             <div>📞 +31 20 123 4567</div>
             <div>📍 Amsterdam, Nederland</div>
           </div>
@@ -66,7 +66,7 @@ const Footer = () => {
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">
-              Copyright 2017 - 2024 © Rival.com
+              Copyright 2017 - 2024 © BoostDirect.nl
             </p>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Gebruiksvoorwaarden</a>
@@ -79,7 +79,7 @@ const Footer = () => {
         {/* Disclaimer */}
         <div className="mt-8 pt-8 border-t border-border">
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Rival.com is op geen enkele wijze geassocieerd of gelieerd met Facebook, Twitter, YouTube, Instagram, LinkedIn, Tidal, Audiomack, Deezer, Pinterest, Sound Cloud, Vine, Periscope, Snapchat, Keek, Mixcloud, Vimeo, Tumblr, Spotify, Radiojavan, VK, Telegram, IMDb, Rottentomatoes, Spreaker, Saatchiart, Chew.tv, Beatstars, TikTok, DatPiff, Bandsintown en Dailymotion. Alle logo's, handelsmerken en merknamen behoren toe aan hun respectievelijke eigenaar en wij maken geen claim of eigendom daarvan.
+            BoostDirect.nl is op geen enkele wijze geassocieerd of gelieerd met Facebook, Twitter, YouTube, Instagram, LinkedIn, Tidal, Audiomack, Deezer, Pinterest, Sound Cloud, Vine, Periscope, Snapchat, Keek, Mixcloud, Vimeo, Tumblr, Spotify, Radiojavan, VK, Telegram, IMDb, Rottentomatoes, Spreaker, Saatchiart, Chew.tv, Beatstars, TikTok, DatPiff, Bandsintown en Dailymotion. Alle logo's, handelsmerken en merknamen behoren toe aan hun respectievelijke eigenaar en wij maken geen claim of eigendom daarvan.
           </p>
         </div>
       </div>
