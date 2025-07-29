@@ -631,6 +631,6 @@ export const platforms = [
   { name: "YouTube", path: "/youtube", icon: "Youtube", gradient: "from-red-500 to-red-600" },
   { name: "TikTok", path: "/tiktok", icon: "Music", gradient: "from-purple-500 to-pink-500" },
   { name: "Spotify", path: "/spotify", icon: "Music", gradient: "from-green-500 to-green-600" },
-  { name: "LinkedIn", path: "/linkedin", icon: "Briefcase", gradient: "from-blue-600 to-blue-700" },
+  { name: "LinkedIn", path: "/linkedin", icon: "Linkedin", gradient: "from-blue-600 to-blue-700" },
   { name: "Threads", path: "/threads", icon: "MessageCircle", gradient: "from-gray-500 to-black" },
 ];

@@ -1,7 +1,7 @@
 import { getServicesByPlatform } from "@/data/services";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Instagram, Youtube, Music, Briefcase, MessageCircle, Camera } from "lucide-react";
+import { Instagram, Youtube, Music, Linkedin, MessageCircle, Camera } from "lucide-react";
 
 const AllPlatforms = () => {
   const platforms = [
@@ -9,7 +9,7 @@ const AllPlatforms = () => {
     { name: "YouTube", services: getServicesByPlatform("YouTube").length, icon: Youtube, color: "from-red-500 to-red-600", path: "/youtube" },
     { name: "TikTok", services: getServicesByPlatform("TikTok").length, icon: Music, color: "from-purple-500 to-pink-500", path: "/tiktok" },
     { name: "Spotify", services: getServicesByPlatform("Spotify").length, icon: Music, color: "from-green-500 to-green-600", path: "/spotify" },
-    { name: "LinkedIn", services: getServicesByPlatform("LinkedIn").length, icon: Briefcase, color: "from-blue-700 to-blue-800", path: "/linkedin" },
+    { name: "LinkedIn", services: getServicesByPlatform("LinkedIn").length, icon: Linkedin, color: "from-blue-700 to-blue-800", path: "/linkedin" },
     { name: "Threads", services: getServicesByPlatform("Threads").length, icon: MessageCircle, color: "from-gray-500 to-black", path: "/threads" },
   ];
 

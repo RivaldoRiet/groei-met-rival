@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import OrderFlow from "./OrderFlow";
 import AuthModal from "./AuthModal";
-import { Rocket, ShoppingCart, Heart, Eye, Users, ThumbsUp, MessageCircle, Share, Bookmark, Play, Smartphone, Film, LucideIcon } from "lucide-react";
+import { Rocket, ShoppingCart, Heart, Eye, Users, ThumbsUp, MessageCircle, Share, Bookmark, Play, Smartphone, Film, LucideIcon, Instagram, Youtube, Music, Linkedin } from "lucide-react";
 
 interface ServiceCardProps {
   service: Service;
@@ -41,6 +41,10 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       "Play": Play,
       "Smartphone": Smartphone,
       "Film": Film,
+      "Instagram": Instagram,
+      "Youtube": Youtube,
+      "Music": Music,
+      "Linkedin": Linkedin,
       "👁️": Eye,
       "❤️": Heart,
       "👥": Users,

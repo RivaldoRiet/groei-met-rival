@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getServicesByPlatform } from "@/data/services";
 import ServiceCard from "@/components/ServiceCard";
+import { Linkedin } from "lucide-react";
 
 const LinkedIn = () => {
   const linkedinServices = getServicesByPlatform("LinkedIn");
@@ -14,8 +15,8 @@ const LinkedIn = () => {
         <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full text-white text-2xl mb-4">
-                💼
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full text-white mb-4">
+                <Linkedin size={28} />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 LinkedIn Services
