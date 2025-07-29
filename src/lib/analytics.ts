@@ -32,9 +32,9 @@ export const initGA = (measurementId: string) => {
 };
 
 // Track page views
-export const trackPageView = (path: string) => {
+export const trackPageView = (path: string, measurementId: string) => {
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', 'GA_MEASUREMENT_ID', {
+    window.gtag('config', measurementId, {
       page_path: path,
       page_title: document.title,
       page_location: window.location.href,
