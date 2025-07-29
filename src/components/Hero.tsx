@@ -1,9 +1,21 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import ServiceDialog from "./ServiceDialog";
+import WelcomeExplainer from "./WelcomeExplainer";
 
 const Hero = () => {
+  const [showServiceDialog, setShowServiceDialog] = useState(false);
+
+  const handleStartOrder = () => {
+    setShowServiceDialog(true);
+  };
+
   return (
-    <section className="relative bg-gradient-to-br from-background via-accent/20 to-primary/10 py-20 overflow-hidden">
+    <>
+      <WelcomeExplainer onStartOrder={handleStartOrder} />
+      
+      <section className="relative bg-gradient-to-br from-background via-accent/20 to-primary/10 py-20 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
       <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-xl animate-pulse-slow" />
@@ -23,16 +35,22 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Link to="/instagram">
-              <Button variant="hero" size="xl" className="min-w-48">
-                Nieuwe Bestelling
-              </Button>
-            </Link>
-            <a href="#platforms">
-              <Button variant="outline" size="xl" className="min-w-48">
-                Bekijk Diensten
-              </Button>
-            </a>
+            <Button 
+              variant="hero" 
+              size="xl" 
+              className="min-w-48"
+              onClick={handleStartOrder}
+            >
+              Nieuwe Bestelling
+            </Button>
+            <Button 
+              variant="outline" 
+              size="xl" 
+              className="min-w-48"
+              onClick={handleStartOrder}
+            >
+              Bekijk Diensten
+            </Button>
           </div>
 
           {/* Features Grid */}
@@ -70,6 +88,12 @@ const Hero = () => {
         </div>
       </div>
     </section>
+    
+    <ServiceDialog 
+      open={showServiceDialog} 
+      onClose={() => setShowServiceDialog(false)} 
+    />
+  </>
   );
 };
 
