@@ -127,7 +127,10 @@ const ServiceDialog = ({ open, onClose }: ServiceDialogProps) => {
                 >
                   <CardContent className="p-8 text-center">
                     <div className={`w-20 h-20 mx-auto rounded-2xl ${platform.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <platform.icon className="w-10 h-10 text-white" />
+                      {(() => {
+                        const IconComponent = platform.icon;
+                        return <IconComponent className="w-10 h-10 text-white" />;
+                      })()}
                     </div>
                     <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{platform.name}</h3>
                     <p className="text-muted-foreground text-lg mb-4">{platform.description}</p>
