@@ -1,44 +1,42 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { services, getServiceById } from "@/data/services";
+import { supabase } from "@/integrations/supabase/client";
+import { User } from "@supabase/supabase-js";
+import OrderFlow from "./OrderFlow";
 
 const PopularServices = () => {
-  const services = [
-    {
-      title: "Instagram Views",
-      description: "Verhoog de zichtbaarheid van je Instagram video's en Reels",
-      price: "€0,70",
-      min: "300",
-      max: "60.000",
-      icon: "📱",
-      gradient: "from-pink-500 to-rose-500"
-    },
-    {
-      title: "YouTube Views", 
-      description: "Krijg meer views op je YouTube video's met gratis likes",
-      price: "€2,90",
-      min: "1000", 
-      max: "10.000.000",
-      icon: "📺",
-      gradient: "from-red-500 to-red-600"
-    },
-    {
-      title: "Spotify Streams",
-      description: "Verhoog je Spotify streams en bereik een groter publiek", 
-      price: "€1,40",
-      min: "500",
-      max: "10.000.000",
-      icon: "🎵",
-      gradient: "from-green-500 to-green-600"
-    },
-    {
-      title: "TikTok Views",
-      description: "Laat je TikTok video's viral gaan met meer views",
-      price: "€0,20", 
-      min: "100",
-      max: "50.000.000",
-      icon: "🎬",
-      gradient: "from-purple-500 to-pink-500"
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+
+  // Get user state
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const popularServices = [
+    services.find(s => s.id === "instagram-views")!,
+    services.find(s => s.id === "youtube-views")!,
+    services.find(s => s.id === "spotify-plays")!,
+    services.find(s => s.id === "tiktok-views")!,
+  ].filter(Boolean);
+
+  const handleOrderClick = (serviceId: string) => {
+    if (!user) {
+      // Redirect to login or show login modal
+      window.location.href = '/login';
+      return;
     }
-  ];
+    setSelectedService(serviceId);
+  };
 
   return (
     <section className="py-20 bg-background">
@@ -53,7 +51,7 @@ const PopularServices = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
+          {popularServices.map((service, index) => (
             <div key={index} className="bg-card rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-border hover:border-primary/20 group">
               <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${service.gradient} flex items-center justify-center text-white text-xl mb-4 group-hover:scale-110 transition-transform`}>
                 {service.icon}
@@ -70,22 +68,34 @@ const PopularServices = () => {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-primary">
-                    Vanaf {service.price}
+                    Vanaf €{(service.price_per_unit * 1000).toFixed(2)}
                   </span>
                 </div>
                 
                 <div className="text-xs text-muted-foreground space-y-1">
-                  <div>Min: {service.min}</div>
-                  <div>Max: {service.max}</div>
+                  <div>Min: {service.minimum_order.toLocaleString()}</div>
+                  <div>Max: {service.maximum_order.toLocaleString()}</div>
                 </div>
                 
-                <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground">
+                <Button 
+                  variant="outline" 
+                  className="w-full group-hover:bg-primary group-hover:text-primary-foreground"
+                  onClick={() => handleOrderClick(service.id)}
+                >
                   Bestellen
                 </Button>
               </div>
             </div>
           ))}
         </div>
+
+        {selectedService && (
+          <OrderFlow
+            service={getServiceById(selectedService)!}
+            user={user}
+            onClose={() => setSelectedService(null)}
+          />
+        )}
       </div>
     </section>
   );
