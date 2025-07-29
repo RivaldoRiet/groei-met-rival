@@ -12,6 +12,7 @@ import YouTube from "./pages/YouTube";
 import TikTok from "./pages/TikTok";
 import Spotify from "./pages/Spotify";
 import LinkedIn from "./pages/LinkedIn";
+import Threads from "./pages/Threads";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/tiktok" element={<TikTok />} />
           <Route path="/spotify" element={<Spotify />} />
           <Route path="/linkedin" element={<LinkedIn />} />
+          <Route path="/threads" element={<Threads />} />
           <Route path="/success" element={<Success />} />
           <Route path="/admin" element={<AdminDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -20,7 +20,7 @@ export const services: Service[] = [
   {
     id: "instagram-usa-followers",
     title: "Instagram USA Followers",
-    description: "Krijg echte Amerikaanse volgers die daadwerkelijk geïnteresseerd zijn in jouw content. Deze premium volgers komen uit de VS en helpen je account professioneel en internationaal over te komen. Perfect voor bedrijven die de Amerikaanse markt willen bereiken.",
+    description: "Krijg echte Amerikaanse volgers die daadwerkelijk geïnteresseerd zijn in jouw content. Deze premium volgers komen uit de VS en helpen je account professioneel en internationaal over te komen.",
     platform: "Instagram",
     price_per_unit: 0.007,
     minimum_order: 50,
@@ -34,7 +34,7 @@ export const services: Service[] = [
   {
     id: "youtube-live-stream-views-120",
     title: "YouTube Live Stream Views 120 mins",
-    description: "Boost je livestream direct met views die 120 minuten blijven kijken! Dit creëert momentum en trekt organische kijkers aan. Ideaal voor product launches, belangrijke aankondigingen of gewoon om je stream populair te laten lijken.",
+    description: "Boost je livestream direct met views die 120 minuten blijven kijken! Dit creëert momentum en trekt organische kijkers aan.",
     platform: "YouTube",
     price_per_unit: 0.0022,
     minimum_order: 100,
@@ -48,7 +48,7 @@ export const services: Service[] = [
   {
     id: "instagram-views",
     title: "Instagram Views",
-    description: "Laat je video's viral gaan met meer views! Views zijn cruciaal voor het Instagram algoritme - meer views betekent dat Instagram je content vaker toont aan anderen. Start de sneeuwbaleffect en zie je bereik exponentieel groeien.",
+    description: "Laat je video's viral gaan met meer views! Views zijn cruciaal voor het Instagram algoritme - meer views betekent dat Instagram je content vaker toont aan anderen.",
     platform: "Instagram",
     price_per_unit: 0.0007,
     minimum_order: 300,
@@ -71,7 +71,7 @@ export const services: Service[] = [
   {
     id: "instagram-nigeria-random-comments",
     title: "Instagram Nigeria Random Comments",
-    description: "Voeg levendige Nigeriaanse comments toe aan je posts! Deze authentieke comments in het Engels maken je posts veel interactiever en creëren een internationale vibe. Perfect voor content creators die diversiteit willen tonen.",
+    description: "Voeg levendige Nigeriaanse comments toe aan je posts! Deze authentieke comments in het Engels maken je posts veel interactiever.",
     platform: "Instagram",
     price_per_unit: 0.055,
     minimum_order: 50,
@@ -85,7 +85,7 @@ export const services: Service[] = [
   {
     id: "instagram-automatic-likes",
     title: "Instagram Automatic Likes",
-    description: "Automatische likes voor nieuwe posts",
+    description: "Automatische likes voor nieuwe posts - stel het één keer in en krijg direct likes op elke nieuwe post!",
     platform: "Instagram",
     price_per_unit: 0.003,
     minimum_order: 100,
@@ -99,7 +99,7 @@ export const services: Service[] = [
   {
     id: "tiktok-auto-views",
     title: "TikTok Auto Views",
-    description: "Automatische views voor je TikTok videos",
+    description: "Automatische views voor je TikTok videos - zorg dat je content direct momentum krijgt!",
     platform: "TikTok",
     price_per_unit: 0.005,
     minimum_order: 100,
@@ -113,7 +113,7 @@ export const services: Service[] = [
   {
     id: "instagram-automatic-saves",
     title: "Instagram Automatic Saves",
-    description: "Automatische saves voor nieuwe posts",
+    description: "Automatische saves voor nieuwe posts - verhoog je engagement rate automatisch!",
     platform: "Instagram",
     price_per_unit: 0.003,
     minimum_order: 20,
@@ -127,7 +127,7 @@ export const services: Service[] = [
   {
     id: "threads-custom-comments",
     title: "Threads Custom Comments",
-    description: "Custom comments voor je Threads posts",
+    description: "Custom comments voor je Threads posts - bepaal zelf wat er gecommentarieerd wordt!",
     platform: "Threads",
     price_per_unit: 0.015,
     minimum_order: 5,
@@ -141,7 +141,7 @@ export const services: Service[] = [
   {
     id: "youtube-subscribers-2",
     title: "YouTube Subscribers #2",
-    description: "Krijg meer YouTube abonnees voor je kanaal",
+    description: "Krijg meer YouTube abonnees voor je kanaal - bouw je community op!",
     platform: "YouTube",
     price_per_unit: 0.045,
     minimum_order: 50,
@@ -155,7 +155,7 @@ export const services: Service[] = [
   {
     id: "instagram-story-views",
     title: "Instagram Story Views",
-    description: "Meer views voor je Instagram Stories",
+    description: "Meer views voor je Instagram Stories - zorg dat je verhalen door meer mensen gezien worden!",
     platform: "Instagram",
     price_per_unit: 0.0005,
     minimum_order: 100,
@@ -169,7 +169,7 @@ export const services: Service[] = [
   {
     id: "tiktok-livestream-views-24h",
     title: "TikTok Livestream Views 24 uur",
-    description: "Livestream views die 24 uur blijven",
+    description: "Livestream views die 24 uur blijven - perfect voor lange streams!",
     platform: "TikTok",
     price_per_unit: 0.181,
     minimum_order: 100,
@@ -183,7 +183,7 @@ export const services: Service[] = [
   {
     id: "tiktok-usa-followers",
     title: "TikTok USA Followers",
-    description: "Amerikaanse TikTok volgers voor je account",
+    description: "Amerikaanse TikTok volgers voor je account - bereik de Amerikaanse markt!",
     platform: "TikTok",
     price_per_unit: 0.0045,
     minimum_order: 50,
@@ -197,7 +197,7 @@ export const services: Service[] = [
   {
     id: "youtube-views",
     title: "YouTube Views",
-    description: "Meer views voor je YouTube videos",
+    description: "Meer views voor je YouTube videos - boost je zichtbaarheid en bereik!",
     platform: "YouTube",
     price_per_unit: 0.0029,
     minimum_order: 1000,
@@ -224,7 +224,7 @@ export const services: Service[] = [
   {
     id: "linkedin-followers",
     title: "LinkedIn Followers",
-    description: "Professionele LinkedIn volgers voor je netwerk",
+    description: "Professionele LinkedIn volgers voor je netwerk - versterk je zakelijke aanwezigheid!",
     platform: "LinkedIn",
     price_per_unit: 0.011,
     minimum_order: 200,
@@ -238,7 +238,7 @@ export const services: Service[] = [
   {
     id: "spotify-followers",
     title: "Spotify Followers",
-    description: "Meer volgers voor je Spotify profiel",
+    description: "Meer volgers voor je Spotify profiel - bouw je muzikale fanbase op!",
     platform: "Spotify",
     price_per_unit: 0.002,
     minimum_order: 1000,
@@ -258,7 +258,7 @@ export const services: Service[] = [
   {
     id: "threads-likes",
     title: "Threads Likes",
-    description: "Meer likes voor je Threads posts",
+    description: "Meer likes voor je Threads posts - boost je engagement op Meta's nieuwste platform!",
     platform: "Threads",
     price_per_unit: 0.005,
     minimum_order: 50,
@@ -272,7 +272,7 @@ export const services: Service[] = [
   {
     id: "instagram-auto-impressions",
     title: "Instagram Auto Impressions",
-    description: "Automatische impressions voor je Instagram posts",
+    description: "Automatische impressions voor je Instagram posts - verhoog je bereik automatisch!",
     platform: "Instagram",
     price_per_unit: 0.0008,
     minimum_order: 100,
@@ -286,7 +286,7 @@ export const services: Service[] = [
   {
     id: "youtube-live-stream-views-30",
     title: "YouTube Live Stream Views 30 mins",
-    description: "Live stream views die 30 minuten blijven",
+    description: "Live stream views die 30 minuten blijven - perfect voor korte streams!",
     platform: "YouTube",
     price_per_unit: 0.0008,
     minimum_order: 100,
@@ -300,7 +300,7 @@ export const services: Service[] = [
   {
     id: "youtube-live-stream-views-60",
     title: "YouTube Live Stream Views 60 mins",
-    description: "Live stream views die 60 minuten blijven",
+    description: "Live stream views die 60 minuten blijven - ideaal voor gemiddelde streams!",
     platform: "YouTube",
     price_per_unit: 0.0012,
     minimum_order: 100,
@@ -314,7 +314,7 @@ export const services: Service[] = [
   {
     id: "instagram-shares",
     title: "Instagram Shares",
-    description: "Meer shares voor je Instagram posts",
+    description: "Meer shares voor je Instagram posts - laat anderen je content delen!",
     platform: "Instagram",
     price_per_unit: 0.00055,
     minimum_order: 100,
@@ -328,7 +328,7 @@ export const services: Service[] = [
   {
     id: "youtube-shorts-comments",
     title: "YouTube Shorts Comments",
-    description: "Comments voor je YouTube Shorts",
+    description: "Comments voor je YouTube Shorts - boost de engagement op je korte videos!",
     platform: "YouTube",
     price_per_unit: 0.005,
     minimum_order: 10,
@@ -342,7 +342,7 @@ export const services: Service[] = [
   {
     id: "tiktok-video-shares",
     title: "TikTok Video Shares",
-    description: "Meer shares voor je TikTok videos",
+    description: "Meer shares voor je TikTok videos - laat je content viral gaan!",
     platform: "TikTok",
     price_per_unit: 0.002,
     minimum_order: 50,
@@ -356,7 +356,7 @@ export const services: Service[] = [
   {
     id: "youtube-shorts-views",
     title: "YouTube Shorts Views",
-    description: "Meer views voor je YouTube Shorts",
+    description: "Meer views voor je YouTube Shorts - maak je korte videos populair!",
     platform: "YouTube",
     price_per_unit: 0.0021,
     minimum_order: 100,
@@ -370,7 +370,7 @@ export const services: Service[] = [
   {
     id: "instagram-automatic-comments",
     title: "Instagram Automatic Comments",
-    description: "Automatische comments voor nieuwe posts",
+    description: "Automatische comments voor nieuwe posts - creëer direct interactie!",
     platform: "Instagram",
     price_per_unit: 0.005,
     minimum_order: 10,
@@ -384,7 +384,7 @@ export const services: Service[] = [
   {
     id: "tiktok-livestream-likes",
     title: "TikTok Livestream Likes",
-    description: "Likes voor je TikTok livestreams",
+    description: "Likes voor je TikTok livestreams - boost je live engagement!",
     platform: "TikTok",
     price_per_unit: 0.0004,
     minimum_order: 10,
@@ -398,7 +398,7 @@ export const services: Service[] = [
   {
     id: "linkedin-likes",
     title: "LinkedIn Likes",
-    description: "Meer likes voor je LinkedIn posts",
+    description: "Meer likes voor je LinkedIn posts - versterk je professionele netwerk!",
     platform: "LinkedIn",
     price_per_unit: 0.011,
     minimum_order: 50,
@@ -412,7 +412,7 @@ export const services: Service[] = [
   {
     id: "threads-followers",
     title: "Threads Followers",
-    description: "Meer volgers voor je Threads account",
+    description: "Meer volgers voor je Threads account - bouw je aanwezigheid op Meta's nieuwe platform!",
     platform: "Threads",
     price_per_unit: 0.005,
     minimum_order: 50,
@@ -426,7 +426,7 @@ export const services: Service[] = [
   {
     id: "youtube-comments",
     title: "YouTube Comments",
-    description: "Meer comments voor je YouTube videos",
+    description: "Meer comments voor je YouTube videos - boost de discussie onder je content!",
     platform: "YouTube",
     price_per_unit: 0.0095,
     minimum_order: 20,
@@ -440,7 +440,7 @@ export const services: Service[] = [
   {
     id: "instagram-likes",
     title: "Instagram Likes",
-    description: "Meer likes voor je Instagram posts",
+    description: "Meer likes voor je Instagram posts - de basis voor goede engagement!",
     platform: "Instagram",
     price_per_unit: 0.0016,
     minimum_order: 100,
@@ -461,7 +461,7 @@ export const services: Service[] = [
   {
     id: "youtube-shorts-likes",
     title: "YouTube Shorts Likes",
-    description: "Meer likes voor je YouTube Shorts",
+    description: "Meer likes voor je YouTube Shorts - boost je korte content!",
     platform: "YouTube",
     price_per_unit: 0.0013,
     minimum_order: 50,
@@ -475,7 +475,7 @@ export const services: Service[] = [
   {
     id: "spotify-plays",
     title: "Spotify Plays",
-    description: "Meer streams voor je Spotify tracks",
+    description: "Meer streams voor je Spotify tracks - laat je muziek door meer mensen gehoord worden!",
     platform: "Spotify",
     price_per_unit: 0.0014,
     minimum_order: 500,
@@ -501,7 +501,7 @@ export const services: Service[] = [
   {
     id: "tiktok-views",
     title: "TikTok Views",
-    description: "Meer views voor je TikTok videos",
+    description: "Meer views voor je TikTok videos - de basis voor virale content!",
     platform: "TikTok",
     price_per_unit: 0.0002,
     minimum_order: 100,
@@ -515,7 +515,7 @@ export const services: Service[] = [
   {
     id: "tiktok-likes",
     title: "TikTok Likes",
-    description: "Meer likes voor je TikTok videos",
+    description: "Meer likes voor je TikTok videos - essentieel voor goede engagement!",
     platform: "TikTok",
     price_per_unit: 0.0005,
     minimum_order: 100,
@@ -534,7 +534,7 @@ export const services: Service[] = [
   {
     id: "instagram-followers",
     title: "Instagram Followers",
-    description: "Meer volgers voor je Instagram account",
+    description: "Meer volgers voor je Instagram account - bouw je community op!",
     platform: "Instagram",
     price_per_unit: 0.0023,
     minimum_order: 100,
@@ -554,7 +554,7 @@ export const services: Service[] = [
   {
     id: "youtube-subscribers",
     title: "YouTube Subscribers",
-    description: "Meer abonnees voor je YouTube kanaal",
+    description: "Meer abonnees voor je YouTube kanaal - groei je community!",
     platform: "YouTube",
     price_per_unit: 0.007,
     minimum_order: 100,
@@ -568,7 +568,7 @@ export const services: Service[] = [
   {
     id: "youtube-likes",
     title: "YouTube Likes",
-    description: "Meer likes voor je YouTube videos",
+    description: "Meer likes voor je YouTube videos - boost je video ranking!",
     platform: "YouTube",
     price_per_unit: 0.011,
     minimum_order: 20,
@@ -588,7 +588,7 @@ export const services: Service[] = [
   {
     id: "tiktok-followers",
     title: "TikTok Followers",
-    description: "Meer volgers voor je TikTok account",
+    description: "Meer volgers voor je TikTok account - vergroot je bereik!",
     platform: "TikTok",
     price_per_unit: 0.0055,
     minimum_order: 50,
@@ -619,4 +619,5 @@ export const platforms = [
   { name: "TikTok", path: "/tiktok", icon: "🎵", gradient: "from-purple-500 to-pink-500" },
   { name: "Spotify", path: "/spotify", icon: "🎵", gradient: "from-green-500 to-green-600" },
   { name: "LinkedIn", path: "/linkedin", icon: "💼", gradient: "from-blue-600 to-blue-700" },
+  { name: "Threads", path: "/threads", icon: "🧵", gradient: "from-gray-500 to-black" },
 ];
