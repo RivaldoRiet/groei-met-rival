@@ -52,18 +52,18 @@ const PopularServices = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {popularServices.map((service, index) => (
-            <div key={index} className="bg-card rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-border hover:border-primary/20 group">
-              <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${service.gradient} flex items-center justify-center text-white text-xl mb-4 group-hover:scale-110 transition-transform`}>
+            <div key={index} className="bg-card rounded-xl p-4 md:p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-border hover:border-primary/20 group">
+              <div className={`w-12 h-12 md:w-14 md:h-14 rounded-lg bg-gradient-to-r ${service.gradient} flex items-center justify-center text-white text-xl md:text-2xl mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
                 {service.icon}
               </div>
               
-              <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+              <h3 className="text-lg md:text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
                 {service.title}
               </h3>
               
-              <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+              <p className="text-muted-foreground mb-4 text-sm md:text-base leading-relaxed">
                 {service.description}
               </p>
               

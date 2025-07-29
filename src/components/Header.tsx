@@ -4,14 +4,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import AuthModal from "./AuthModal";
 import { Link } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { getServicesByPlatform } from "@/data/services";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Header = () => {
   const [user, setUser] = useState<User | null>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const platforms = [
     { name: "Instagram", path: "/instagram", icon: "📸" },
@@ -61,16 +64,16 @@ const Header = () => {
 
   return (
     <header className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-background/95">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-3 md:py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-primary to-primary-dark text-primary-foreground rounded-lg p-2 font-bold text-xl">
+          <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
+            <div className="bg-gradient-to-r from-primary to-primary-dark text-primary-foreground rounded-lg p-2 font-bold text-lg md:text-xl">
               R
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-foreground">Rival</h1>
-              <p className="text-xs text-muted-foreground">Premium Social Media Marketing</p>
+            <div className="hidden sm:block">
+              <h1 className="text-lg md:text-xl font-bold text-foreground">Rival</h1>
+              <p className="text-xs text-muted-foreground hidden md:block">Premium Social Media Marketing</p>
             </div>
           </Link>
 
@@ -135,16 +138,25 @@ const Header = () => {
             )}
           </nav>
 
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden p-2 -mr-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
           {/* Right side actions */}
-          <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center space-x-2">
+          <div className="hidden md:flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
               <span className="text-sm text-muted-foreground">NL</span>
               <span className="text-sm font-medium">€0,00</span>
             </div>
             
             {user ? (
               <div className="flex items-center space-x-2">
-                <span className="text-sm hidden md:block">
+                <span className="text-sm hidden lg:block">
                   Welkom, {user.user_metadata?.full_name || user.email}
                 </span>
                 <Button variant="outline" size="sm" onClick={handleSignOut}>
@@ -152,12 +164,61 @@ const Header = () => {
                 </Button>
               </div>
             ) : (
-              <Button variant="hero" onClick={() => setShowAuthModal(true)}>
+              <Button variant="hero" size="sm" onClick={() => setShowAuthModal(true)}>
                 Inloggen
               </Button>
             )}
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-border pt-4 space-y-2">
+            {platforms.map((platform) => (
+              <Link
+                key={platform.name}
+                to={platform.path}
+                className="flex items-center space-x-3 py-3 px-2 rounded-lg hover:bg-muted transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="text-lg">{platform.icon}</span>
+                <span className="font-medium">{platform.name}</span>
+              </Link>
+            ))}
+            
+            <div className="pt-4 border-t border-border mt-4">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm text-muted-foreground">NL</span>
+                <span className="text-sm font-medium">€0,00</span>
+              </div>
+              
+              {user ? (
+                <div className="space-y-2">
+                  <p className="text-sm text-muted-foreground">
+                    Welkom, {user.user_metadata?.full_name || user.email}
+                  </p>
+                  <Button variant="outline" size="sm" onClick={handleSignOut} className="w-full">
+                    Uitloggen
+                  </Button>
+                </div>
+              ) : (
+                <Button variant="hero" onClick={() => setShowAuthModal(true)} className="w-full">
+                  Inloggen
+                </Button>
+              )}
+            </div>
+            
+            {isAdmin && (
+              <Link 
+                to="/admin" 
+                className="block py-3 px-2 rounded-lg hover:bg-muted transition-colors font-medium text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Admin Dashboard
+              </Link>
+            )}
+          </div>
+        )}
       </div>
       
       {showAuthModal && (

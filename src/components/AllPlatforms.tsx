@@ -24,16 +24,16 @@ const AllPlatforms = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 mb-12">
           {platforms.map((platform, index) => (
-            <Link key={index} to={platform.path} className="bg-card rounded-lg p-4 text-center hover:shadow-md transition-all duration-300 border border-border hover:border-primary/20 group block">
-              <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${platform.color} flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform`}>
+            <Link key={index} to={platform.path} className="bg-card rounded-xl p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 border border-border hover:border-primary/20 group block">
+              <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r ${platform.color} flex items-center justify-center text-white text-xl md:text-2xl mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
                 {platform.icon}
               </div>
-              <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors">
+              <h3 className="font-semibold text-sm md:text-base mb-1 group-hover:text-primary transition-colors">
                 {platform.name}
               </h3>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs md:text-sm text-muted-foreground">
                 {platform.services} services
               </p>
             </Link>
