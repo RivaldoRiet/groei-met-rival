@@ -20,7 +20,7 @@ export const services: Service[] = [
   {
     id: "instagram-usa-followers",
     title: "Instagram USA Followers",
-    description: "Krijg echte Amerikaanse Instagram volgers voor je account",
+    description: "Krijg echte Amerikaanse volgers die daadwerkelijk geïnteresseerd zijn in jouw content. Deze premium volgers komen uit de VS en helpen je account professioneel en internationaal over te komen. Perfect voor bedrijven die de Amerikaanse markt willen bereiken.",
     platform: "Instagram",
     price_per_unit: 0.007,
     minimum_order: 50,
@@ -34,7 +34,7 @@ export const services: Service[] = [
   {
     id: "youtube-live-stream-views-120",
     title: "YouTube Live Stream Views 120 mins",
-    description: "Live stream views die 120 minuten blijven voor maximale engagement",
+    description: "Boost je livestream direct met views die 120 minuten blijven kijken! Dit creëert momentum en trekt organische kijkers aan. Ideaal voor product launches, belangrijke aankondigingen of gewoon om je stream populair te laten lijken.",
     platform: "YouTube",
     price_per_unit: 0.0022,
     minimum_order: 100,
@@ -48,7 +48,7 @@ export const services: Service[] = [
   {
     id: "instagram-views",
     title: "Instagram Views",
-    description: "Verhoog je bereik met echte Instagram video views",
+    description: "Laat je video's viral gaan met meer views! Views zijn cruciaal voor het Instagram algoritme - meer views betekent dat Instagram je content vaker toont aan anderen. Start de sneeuwbaleffect en zie je bereik exponentieel groeien.",
     platform: "Instagram",
     price_per_unit: 0.0007,
     minimum_order: 300,
@@ -71,7 +71,7 @@ export const services: Service[] = [
   {
     id: "instagram-nigeria-random-comments",
     title: "Instagram Nigeria Random Comments",
-    description: "Nigeriaanse random comments voor je Instagram posts",
+    description: "Voeg levendige Nigeriaanse comments toe aan je posts! Deze authentieke comments in het Engels maken je posts veel interactiever en creëren een internationale vibe. Perfect voor content creators die diversiteit willen tonen.",
     platform: "Instagram",
     price_per_unit: 0.055,
     minimum_order: 50,
