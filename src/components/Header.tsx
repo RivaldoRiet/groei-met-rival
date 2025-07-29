@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import AuthModal from "./AuthModal";
 import { Link } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, Instagram, Youtube, Music, Music2, Linkedin } from "lucide-react";
 import { getServicesByPlatform } from "@/data/services";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -17,11 +17,11 @@ const Header = () => {
   const isMobile = useIsMobile();
 
   const platforms = [
-    { name: "Instagram", path: "/instagram", icon: "📸" },
-    { name: "YouTube", path: "/youtube", icon: "📺" },
-    { name: "TikTok", path: "/tiktok", icon: "🎵" },
-    { name: "Spotify", path: "/spotify", icon: "🎵" },
-    { name: "LinkedIn", path: "/linkedin", icon: "💼" },
+    { name: "Instagram", path: "/instagram", icon: "Instagram" },
+    { name: "YouTube", path: "/youtube", icon: "Youtube" },
+    { name: "TikTok", path: "/tiktok", icon: "Music" },
+    { name: "Spotify", path: "/spotify", icon: "Music2" },
+    { name: "LinkedIn", path: "/linkedin", icon: "Linkedin" },
   ];
 
   useEffect(() => {
@@ -68,9 +68,11 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
-            <div className="bg-gradient-to-r from-primary to-primary-dark text-primary-foreground rounded-lg p-2 font-bold text-lg md:text-xl">
-              B
-            </div>
+            <img 
+              src="/lovable-uploads/28bec140-6b90-4d8f-bb77-8b29ac665450.png" 
+              alt="BoostDirect Logo" 
+              className="w-8 h-8 md:w-10 md:h-10"
+            />
             <div className="hidden sm:block">
               <h1 className="text-lg md:text-xl font-bold text-foreground">BoostDirect</h1>
               <p className="text-xs text-muted-foreground hidden md:block">Premium Social Media Marketing</p>
@@ -81,6 +83,11 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-6">
             {platforms.map((platform) => {
               const platformServices = getServicesByPlatform(platform.name);
+              const IconComponent = platform.name === "Instagram" ? Instagram : 
+                                   platform.name === "YouTube" ? Youtube :
+                                   platform.name === "TikTok" ? Music :
+                                   platform.name === "Spotify" ? Music2 :
+                                   platform.name === "LinkedIn" ? Linkedin : Instagram;
               return (
                 <div
                   key={platform.name}
@@ -92,7 +99,7 @@ const Header = () => {
                     to={platform.path}
                     className="flex items-center space-x-1 text-foreground hover:text-primary transition-colors"
                   >
-                    <span>{platform.icon}</span>
+                    <IconComponent size={16} />
                     <span>{platform.name}</span>
                     <ChevronDown size={16} />
                   </Link>
@@ -174,17 +181,24 @@ const Header = () => {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-border pt-4 space-y-2">
-            {platforms.map((platform) => (
-              <Link
-                key={platform.name}
-                to={platform.path}
-                className="flex items-center space-x-3 py-3 px-2 rounded-lg hover:bg-muted transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <span className="text-lg">{platform.icon}</span>
-                <span className="font-medium">{platform.name}</span>
-              </Link>
-            ))}
+            {platforms.map((platform) => {
+              const IconComponent = platform.name === "Instagram" ? Instagram : 
+                                   platform.name === "YouTube" ? Youtube :
+                                   platform.name === "TikTok" ? Music :
+                                   platform.name === "Spotify" ? Music2 :
+                                   platform.name === "LinkedIn" ? Linkedin : Instagram;
+              return (
+                <Link
+                  key={platform.name}
+                  to={platform.path}
+                  className="flex items-center space-x-3 py-3 px-2 rounded-lg hover:bg-muted transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <IconComponent size={20} />
+                  <span className="font-medium">{platform.name}</span>
+                </Link>
+              );
+            })}
             
             <div className="pt-4 border-t border-border mt-4">
               <div className="flex items-center justify-between mb-3">

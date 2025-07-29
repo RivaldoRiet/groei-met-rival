@@ -3,12 +3,13 @@ import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Instagram, Youtube, Music, Music2, Linkedin, Zap, Lock, Users, Target, BarChart3, Shield } from "lucide-react";
 
 const Services = () => {
   const platforms = [
     {
       name: "Instagram",
-      icon: "📸",
+      icon: Instagram,
       description: "Vergroot je Instagram presence met echte followers, likes en views",
       services: ["Followers", "Likes", "Views", "Comments", "Story Views", "Reels Views"],
       link: "/instagram",
@@ -16,7 +17,7 @@ const Services = () => {
     },
     {
       name: "YouTube",
-      icon: "📺",
+      icon: Youtube,
       description: "Boost je YouTube kanaal met subscribers, views en engagement",
       services: ["Subscribers", "Views", "Likes", "Comments", "Watch Time", "Shares"],
       link: "/youtube",
@@ -24,7 +25,7 @@ const Services = () => {
     },
     {
       name: "TikTok",
-      icon: "🎵",
+      icon: Music,
       description: "Ga viraal op TikTok met followers, likes en views",
       services: ["Followers", "Likes", "Views", "Comments", "Shares", "Live Views"],
       link: "/tiktok",
@@ -32,7 +33,7 @@ const Services = () => {
     },
     {
       name: "Spotify",
-      icon: "🎵",
+      icon: Music2,
       description: "Verhoog je Spotify streams en monthly listeners",
       services: ["Streams", "Monthly Listeners", "Followers", "Playlist Adds", "Saves"],
       link: "/spotify",
@@ -40,7 +41,7 @@ const Services = () => {
     },
     {
       name: "LinkedIn",
-      icon: "💼",
+      icon: Linkedin,
       description: "Professionele groei op LinkedIn voor bedrijven en professionals",
       services: ["Connections", "Followers", "Post Likes", "Comments", "Shares", "Views"],
       link: "/linkedin",
@@ -50,32 +51,32 @@ const Services = () => {
 
   const features = [
     {
-      icon: "🚀",
+      icon: Zap,
       title: "Snelle Levering",
       description: "Orders starten binnen 24 uur en worden snel voltooid"
     },
     {
-      icon: "🔒",
+      icon: Lock,
       title: "100% Veilig",
       description: "Alle services zijn veilig en volgen platform richtlijnen"
     },
     {
-      icon: "👥",
+      icon: Users,
       title: "Echte Gebruikers",
       description: "Alleen authentieke, actieve accounts - geen bots"
     },
     {
-      icon: "🎯",
+      icon: Target,
       title: "Geo-Targeting",
       description: "Services beschikbaar voor specifieke landen en regio's"
     },
     {
-      icon: "📊",
+      icon: BarChart3,
       title: "Live Tracking",
       description: "Volg de voortgang van je bestellingen in real-time"
     },
     {
-      icon: "🛡️",
+      icon: Shield,
       title: "Garanties",
       description: "Refill garantie en geld-terug-garantie beschikbaar"
     }
@@ -104,7 +105,7 @@ const Services = () => {
                   <Card key={platform.name} className="group hover:shadow-lg transition-all duration-300">
                     <CardContent className="p-6">
                       <div className={`bg-gradient-to-br ${platform.color} rounded-lg p-6 text-center mb-6`}>
-                        <div className="text-4xl mb-3">{platform.icon}</div>
+                        <platform.icon size={32} className="mx-auto mb-3 text-primary" />
                         <h3 className="text-xl font-bold">{platform.name}</h3>
                       </div>
                       
@@ -141,7 +142,7 @@ const Services = () => {
                 {features.map((feature, index) => (
                   <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
-                      <div className="text-4xl mb-4">{feature.icon}</div>
+                      <feature.icon size={32} className="mx-auto mb-4 text-primary" />
                       <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
                       <p className="text-muted-foreground text-sm">{feature.description}</p>
                     </CardContent>

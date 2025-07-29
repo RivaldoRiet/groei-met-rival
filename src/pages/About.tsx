@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { Instagram, Youtube, Music } from "lucide-react";
 
 const About = () => {
   return (
@@ -76,17 +77,17 @@ const About = () => {
                     <h2 className="text-2xl font-bold mb-6">Onze Services</h2>
                     <div className="grid md:grid-cols-3 gap-6">
                       <div className="text-center">
-                        <div className="text-3xl mb-3">📸</div>
+                        <Instagram size={32} className="mx-auto mb-3 text-primary" />
                         <h3 className="font-semibold mb-2">Instagram Marketing</h3>
                         <p className="text-sm text-muted-foreground">Followers, likes, views en meer</p>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl mb-3">📺</div>
+                        <Youtube size={32} className="mx-auto mb-3 text-primary" />
                         <h3 className="font-semibold mb-2">YouTube Growth</h3>
                         <p className="text-sm text-muted-foreground">Subscribers, views en engagement</p>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl mb-3">🎵</div>
+                        <Music size={32} className="mx-auto mb-3 text-primary" />
                         <h3 className="font-semibold mb-2">TikTok & Spotify</h3>
                         <p className="text-sm text-muted-foreground">Viraal gaan op alle platforms</p>
                       </div>

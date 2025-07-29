@@ -6,9 +6,11 @@ const Footer = () => {
           {/* Logo and description */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="bg-gradient-to-r from-primary to-primary-dark text-primary-foreground rounded-lg p-2 font-bold text-xl">
-                B
-              </div>
+              <img 
+                src="/lovable-uploads/28bec140-6b90-4d8f-bb77-8b29ac665450.png" 
+                alt="BoostDirect Logo" 
+                className="w-8 h-8"
+              />
               <div>
                 <h1 className="text-xl font-bold text-foreground">BoostDirect</h1>
                 <p className="text-xs text-muted-foreground">Premium Social Media Marketing</p>
