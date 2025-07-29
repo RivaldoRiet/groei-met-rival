@@ -34,7 +34,7 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Ontdek</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Services</a></li>
+              <li><a href="/services" className="hover:text-primary transition-colors">Services</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Rapportage</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Affiliate</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">BoostDirect Wallet</a></li>
@@ -45,10 +45,10 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Support</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">FAQ</a></li>
+              <li><a href="/faq" className="hover:text-primary transition-colors">FAQ</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Tickets</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Gebruiksvoorwaarden</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Privacybeleid</a></li>
+              <li><a href="/gebruiksvoorwaarden" className="hover:text-primary transition-colors">Gebruiksvoorwaarden</a></li>
+              <li><a href="/privacybeleid" className="hover:text-primary transition-colors">Privacybeleid</a></li>
             </ul>
           </div>
         </div>
@@ -69,9 +69,9 @@ const Footer = () => {
               Copyright 2017 - 2025 © BoostDirect.nl
             </p>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Gebruiksvoorwaarden</a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacybeleid</a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Retourbeleid</a>
+              <a href="/gebruiksvoorwaarden" className="text-muted-foreground hover:text-primary transition-colors">Gebruiksvoorwaarden</a>
+              <a href="/privacybeleid" className="text-muted-foreground hover:text-primary transition-colors">Privacybeleid</a>
+              <a href="/retourbeleid" className="text-muted-foreground hover:text-primary transition-colors">Retourbeleid</a>
             </div>
           </div>
         </div>

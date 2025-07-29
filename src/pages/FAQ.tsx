@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -110,18 +109,7 @@ const FAQ = () => {
   ];
 
   return (
-    <>
-      <Helmet>
-        <title>Veelgestelde Vragen (FAQ) - BoostDirect | Antwoorden op Al Uw Vragen</title>
-        <meta 
-          name="description" 
-          content="Vind antwoorden op veelgestelde vragen over BoostDirect social media marketing services, bestellingen, betaling en support." 
-        />
-        <meta name="keywords" content="faq, veelgestelde vragen, help, support, boostdirect, social media marketing" />
-        <link rel="canonical" href="https://boostdirect.nl/faq" />
-      </Helmet>
-      
-      <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
         <Header />
         
         <main className="container mx-auto px-4 py-16">
@@ -222,7 +210,7 @@ const FAQ = () => {
         
         <Footer />
       </div>
-    </>
+    
   );
 };
 

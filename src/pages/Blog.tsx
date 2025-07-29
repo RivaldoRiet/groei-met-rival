@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -70,18 +69,7 @@ const Blog = () => {
   const categories = ["Alle", "Instagram", "YouTube", "TikTok", "LinkedIn", "Analytics", "Strategie"];
 
   return (
-    <>
-      <Helmet>
-        <title>Blog - BoostDirect | Social Media Marketing Tips & Strategieën</title>
-        <meta 
-          name="description" 
-          content="Ontdek waardevolle tips, strategieën en inzichten voor social media marketing. Leer van experts hoe je succesvol kunt zijn online." 
-        />
-        <meta name="keywords" content="blog, social media marketing, tips, strategieën, instagram, youtube, tiktok, linkedin" />
-        <link rel="canonical" href="https://boostdirect.nl/blog" />
-      </Helmet>
-      
-      <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
         <Header />
         
         <main className="container mx-auto px-4 py-16">
@@ -193,7 +181,7 @@ const Blog = () => {
         
         <Footer />
       </div>
-    </>
+    
   );
 };
 

@@ -100,7 +100,7 @@ const About = () => {
         
         <Footer />
       </div>
-    </>
+    
   );
 };
 

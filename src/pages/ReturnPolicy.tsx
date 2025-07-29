@@ -1,20 +1,9 @@
-import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 
 const ReturnPolicy = () => {
   return (
-    <>
-      <Helmet>
-        <title>Retourbeleid - BoostDirect | Return & Refund Policy</title>
-        <meta 
-          name="description" 
-          content="Lees het retourbeleid van BoostDirect voor informatie over retouren, refunds en garanties op onze social media marketing services." 
-        />
-        <meta name="keywords" content="retourbeleid, return policy, refund, garantie, boostdirect" />
-        <link rel="canonical" href="https://boostdirect.nl/retourbeleid" />
-      </Helmet>
       
       <div className="min-h-screen bg-background">
         <Header />
@@ -218,7 +207,7 @@ const ReturnPolicy = () => {
         
         <Footer />
       </div>
-    </>
+    
   );
 };
 

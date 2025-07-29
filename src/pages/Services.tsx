@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -83,18 +82,7 @@ const Services = () => {
   ];
 
   return (
-    <>
-      <Helmet>
-        <title>Services - BoostDirect | Premium Social Media Marketing Services</title>
-        <meta 
-          name="description" 
-          content="Ontdek alle social media marketing services van BoostDirect. Instagram, YouTube, TikTok, Spotify en LinkedIn growth services." 
-        />
-        <meta name="keywords" content="services, social media marketing, instagram, youtube, tiktok, spotify, linkedin, followers, views, likes" />
-        <link rel="canonical" href="https://boostdirect.nl/services" />
-      </Helmet>
-      
-      <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
         <Header />
         
         <main className="container mx-auto px-4 py-16">
@@ -234,7 +222,7 @@ const Services = () => {
         
         <Footer />
       </div>
-    </>
+    
   );
 };
 

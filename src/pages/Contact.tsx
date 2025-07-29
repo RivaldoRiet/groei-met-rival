@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,16 +6,6 @@ import { Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react";
 
 const Contact = () => {
   return (
-    <>
-      <Helmet>
-        <title>Contact - BoostDirect | Neem Contact Op Voor Support</title>
-        <meta 
-          name="description" 
-          content="Neem contact op met BoostDirect voor vragen over onze social media marketing services. We helpen je graag verder!" 
-        />
-        <meta name="keywords" content="contact, support, klantenservice, boostdirect, social media marketing" />
-        <link rel="canonical" href="https://boostdirect.nl/contact" />
-      </Helmet>
       
       <div className="min-h-screen bg-background">
         <Header />
@@ -226,7 +215,7 @@ const Contact = () => {
         
         <Footer />
       </div>
-    </>
+    
   );
 };
 

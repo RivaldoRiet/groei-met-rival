@@ -1,20 +1,9 @@
-import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 
 const PrivacyPolicy = () => {
   return (
-    <>
-      <Helmet>
-        <title>Privacybeleid - BoostDirect | Privacy Policy</title>
-        <meta 
-          name="description" 
-          content="Lees het privacybeleid van BoostDirect over hoe wij uw persoonlijke gegevens verzamelen, gebruiken en beschermen." 
-        />
-        <meta name="keywords" content="privacybeleid, privacy policy, gegevensbescherming, avg, boostdirect" />
-        <link rel="canonical" href="https://boostdirect.nl/privacybeleid" />
-      </Helmet>
       
       <div className="min-h-screen bg-background">
         <Header />
@@ -214,7 +203,7 @@ const PrivacyPolicy = () => {
         
         <Footer />
       </div>
-    </>
+    
   );
 };
 

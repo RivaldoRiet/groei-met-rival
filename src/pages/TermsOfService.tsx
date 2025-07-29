@@ -1,20 +1,9 @@
-import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 
 const TermsOfService = () => {
   return (
-    <>
-      <Helmet>
-        <title>Gebruiksvoorwaarden - BoostDirect | Terms of Service</title>
-        <meta 
-          name="description" 
-          content="Lees de gebruiksvoorwaarden van BoostDirect voor het gebruik van onze social media marketing services." 
-        />
-        <meta name="keywords" content="gebruiksvoorwaarden, terms of service, voorwaarden, boostdirect" />
-        <link rel="canonical" href="https://boostdirect.nl/gebruiksvoorwaarden" />
-      </Helmet>
       
       <div className="min-h-screen bg-background">
         <Header />
@@ -170,7 +159,7 @@ const TermsOfService = () => {
         
         <Footer />
       </div>
-    </>
+    
   );
 };
 
