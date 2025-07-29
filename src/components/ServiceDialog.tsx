@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, X } from "lucide-react";
+import { Search, X, Instagram, Youtube, Music, Linkedin, MessageSquare, ArrowLeft } from "lucide-react";
 import { services, getServicesByPlatform } from "@/data/services";
 import ServiceCard from "./ServiceCard";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -15,35 +15,70 @@ interface ServiceDialogProps {
 
 const ServiceDialog = ({ open, onClose }: ServiceDialogProps) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedPlatform, setSelectedPlatform] = useState<string>("Alle");
+  const [selectedPlatform, setSelectedPlatform] = useState<string>("home");
   const [filteredServices, setFilteredServices] = useState(services);
 
-  const platforms = ["Alle", "Instagram", "YouTube", "TikTok", "Spotify", "LinkedIn", "Threads"];
+  const platformsData = [
+    { 
+      name: "Instagram", 
+      icon: Instagram, 
+      color: "bg-gradient-to-br from-purple-600 to-pink-500",
+      description: "Likes, Followers, Views & meer"
+    },
+    { 
+      name: "YouTube", 
+      icon: Youtube, 
+      color: "bg-gradient-to-br from-red-600 to-red-500",
+      description: "Views, Subscribers, Likes"
+    },
+    { 
+      name: "TikTok", 
+      icon: MessageSquare, 
+      color: "bg-gradient-to-br from-black to-gray-800",
+      description: "Views, Likes, Followers"
+    },
+    { 
+      name: "Spotify", 
+      icon: Music, 
+      color: "bg-gradient-to-br from-green-600 to-green-500",
+      description: "Plays, Followers, Saves"
+    },
+    { 
+      name: "LinkedIn", 
+      icon: Linkedin, 
+      color: "bg-gradient-to-br from-blue-600 to-blue-500",
+      description: "Followers, Likes, Connections"
+    },
+    { 
+      name: "Threads", 
+      icon: MessageSquare, 
+      color: "bg-gradient-to-br from-gray-800 to-black",
+      description: "Likes, Followers, Comments"
+    }
+  ];
 
   useEffect(() => {
-    let filtered = services;
-
-    // Filter by platform
-    if (selectedPlatform !== "Alle") {
-      filtered = getServicesByPlatform(selectedPlatform);
+    if (selectedPlatform === "home") {
+      setFilteredServices([]);
+      return;
     }
+
+    let filtered = getServicesByPlatform(selectedPlatform);
 
     // Filter by search query
     if (searchQuery) {
       filtered = filtered.filter(service =>
         service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        service.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        service.platform.toLowerCase().includes(searchQuery.toLowerCase())
+        service.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    // Sort by popularity (services are already sorted in data file)
     setFilteredServices(filtered);
   }, [searchQuery, selectedPlatform]);
 
-  const resetFilters = () => {
+  const goBackToHome = () => {
+    setSelectedPlatform("home");
     setSearchQuery("");
-    setSelectedPlatform("Alle");
   };
 
   return (
@@ -52,35 +87,20 @@ const ServiceDialog = ({ open, onClose }: ServiceDialogProps) => {
         <DialogHeader className="border-b pb-6">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-2xl font-bold">
-              🚀 Kies je Social Media Services
+              {selectedPlatform === "home" ? "🚀 Kies je Social Media Platform" : `📱 ${selectedPlatform} Services`}
             </DialogTitle>
             <Button variant="ghost" size="sm" onClick={onClose}>
               <X size={20} />
             </Button>
           </div>
           
-          {/* Step 1: Platform Selection */}
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold mb-3">Stap 1: Kies je platform</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-              {platforms.map((platform) => (
-                <Button
-                  key={platform}
-                  variant={selectedPlatform === platform ? "default" : "outline"}
-                  className="h-12 text-sm font-medium"
-                  onClick={() => setSelectedPlatform(platform)}
-                >
-                  {platform}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          {/* Step 2: Search (only show when platform is selected) */}
-          {selectedPlatform !== "Alle" && (
-            <div className="mt-4">
-              <h3 className="text-sm font-medium mb-2 text-muted-foreground">Stap 2: Verfijn je zoekopdracht (optioneel)</h3>
-              <div className="relative">
+          {selectedPlatform !== "home" && (
+            <div className="mt-4 flex items-center gap-4">
+              <Button variant="outline" size="sm" onClick={goBackToHome} className="flex items-center gap-2">
+                <ArrowLeft size={16} />
+                Terug naar platforms
+              </Button>
+              <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={16} />
                 <Input
                   placeholder={`Zoek binnen ${selectedPlatform} services...`}
@@ -91,27 +111,42 @@ const ServiceDialog = ({ open, onClose }: ServiceDialogProps) => {
               </div>
             </div>
           )}
-          
-          {(searchQuery || selectedPlatform !== "Alle") && (
-            <div className="mt-4">
-              <Button variant="outline" size="sm" onClick={resetFilters}>
-                🔄 Alles resetten
-              </Button>
-            </div>
-          )}
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto p-6">
-          {filteredServices.length === 0 ? (
+          {selectedPlatform === "home" ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {platformsData.map((platform) => (
+                <Card 
+                  key={platform.name}
+                  className="group cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 hover:border-primary/50"
+                  onClick={() => setSelectedPlatform(platform.name)}
+                >
+                  <CardContent className="p-8 text-center">
+                    <div className={`w-20 h-20 mx-auto rounded-2xl ${platform.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                      <platform.icon className="w-10 h-10 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{platform.name}</h3>
+                    <p className="text-muted-foreground text-lg mb-4">{platform.description}</p>
+                    <div className="bg-primary/10 rounded-lg px-4 py-2 inline-block">
+                      <span className="text-primary font-semibold">
+                        {getServicesByPlatform(platform.name).length} services beschikbaar
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : filteredServices.length === 0 ? (
             <Card className="border-dashed">
               <CardContent className="flex flex-col items-center justify-center py-12">
                 <div className="text-4xl mb-4">🔍</div>
                 <h3 className="text-lg font-semibold mb-2">Geen services gevonden</h3>
                 <p className="text-muted-foreground text-center max-w-md">
-                  Probeer je zoekterm aan te passen of kies een ander platform filter.
+                  Probeer je zoekterm aan te passen of ga terug naar de platform selectie.
                 </p>
-                <Button variant="outline" className="mt-4" onClick={resetFilters}>
-                  Toon alle services
+                <Button variant="outline" className="mt-4" onClick={goBackToHome}>
+                  Terug naar platforms
                 </Button>
               </CardContent>
             </Card>
@@ -123,8 +158,7 @@ const ServiceDialog = ({ open, onClose }: ServiceDialogProps) => {
                     {filteredServices.length} services gevonden
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {selectedPlatform !== "Alle" ? `${selectedPlatform} services` : "Alle platforms"}
-                    {searchQuery && ` matching "${searchQuery}"`}
+                    {selectedPlatform} services{searchQuery && ` matching "${searchQuery}"`}
                   </p>
                 </div>
               </div>
