@@ -7,6 +7,7 @@ import { User } from "@supabase/supabase-js";
 import OrderFlow from "./OrderFlow";
 import AuthModal from "./AuthModal";
 import { Rocket, ShoppingCart, Heart, Eye, Users, ThumbsUp, MessageCircle, Share, Bookmark, Play, Smartphone, Film, LucideIcon, Instagram, Youtube, Music, Linkedin } from "lucide-react";
+import { trackServiceView, trackAddToCart } from "@/lib/analytics";
 
 interface ServiceCardProps {
   service: Service;
@@ -28,6 +29,11 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // Track service view when component mounts
+  useEffect(() => {
+    trackServiceView(service.title, service.platform, service.price_per_unit * 1000);
+  }, [service]);
 
   const getIcon = (iconName: string): LucideIcon => {
     const iconMap: { [key: string]: LucideIcon } = {
@@ -61,6 +67,9 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
   };
 
   const handleOrderClick = (serviceId: string) => {
+    // Track add to cart event
+    trackAddToCart(service.title, service.platform, service.price_per_unit * service.minimum_order);
+    
     if (!user) {
       setShowAuthModal(true);
       return;

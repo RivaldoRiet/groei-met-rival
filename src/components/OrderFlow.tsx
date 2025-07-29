@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { User } from "@supabase/supabase-js";
 import { X, Shield, Clock, Star, TrendingUp } from "lucide-react";
+import { trackBeginCheckout, trackPurchase } from "@/lib/analytics";
 
 interface OrderFlowProps {
   service: Service;
@@ -26,7 +27,14 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
+  // Track begin checkout when component mounts
+  useEffect(() => {
+    const totalPrice = quantity * getPricePerUnit();
+    trackBeginCheckout(service.title, totalPrice);
+  }, [service, quantity]);
+
   const getPricePerUnit = () => {
+
     if (selectedOption === "standard") {
       return service.price_per_unit;
     }
@@ -86,6 +94,20 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
         .single();
 
       if (error) throw error;
+
+      // Track purchase for analytics
+      trackPurchase({
+        orderId: order.id,
+        value: finalPrice,
+        currency: 'EUR',
+        items: [{
+          item_id: service.id,
+          item_name: service.title,
+          category: service.platform,
+          quantity: quantity,
+          price: getPricePerUnit(),
+        }],
+      });
 
       // Call Stripe checkout edge function
       const { data, error: functionError } = await supabase.functions.invoke('create-checkout-session', {

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
+import { trackLead } from "@/lib/analytics";
 import { useToast } from "@/hooks/use-toast";
 
 interface AuthModalProps {
