@@ -23,10 +23,10 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">BoostDirect</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Over Ons</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Nieuws</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+              <li><a href="/over-ons" className="hover:text-primary transition-colors">Over Ons</a></li>
+              <li><a href="/nieuws" className="hover:text-primary transition-colors">Nieuws</a></li>
+              <li><a href="/blog" className="hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="/contact" className="hover:text-primary transition-colors">Contact</a></li>
             </ul>
           </div>
 

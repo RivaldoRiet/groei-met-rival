@@ -14,6 +14,15 @@ import Spotify from "./pages/Spotify";
 import LinkedIn from "./pages/LinkedIn";
 import Threads from "./pages/Threads";
 import GoogleAdsSetup from "./components/GoogleAdsSetup";
+import About from "./pages/About";
+import News from "./pages/News";
+import Blog from "./pages/Blog";
+import Contact from "./pages/Contact";
+import Services from "./pages/Services";
+import FAQ from "./pages/FAQ";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ReturnPolicy from "./pages/ReturnPolicy";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +40,15 @@ const AppRoutes = () => {
       <Route path="/success" element={<Success />} />
       <Route path="/google-ads-setup" element={<GoogleAdsSetup />} />
       <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/over-ons" element={<About />} />
+      <Route path="/nieuws" element={<News />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/faq" element={<FAQ />} />
+      <Route path="/gebruiksvoorwaarden" element={<TermsOfService />} />
+      <Route path="/privacybeleid" element={<PrivacyPolicy />} />
+      <Route path="/retourbeleid" element={<ReturnPolicy />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
