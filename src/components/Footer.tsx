@@ -66,7 +66,7 @@ const Footer = () => {
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">
-              Copyright 2017 - 2024 © BoostDirect.nl
+              Copyright 2017 - 2025 © BoostDirect.nl
             </p>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Gebruiksvoorwaarden</a>
