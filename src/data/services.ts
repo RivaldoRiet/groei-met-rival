@@ -32,11 +32,8 @@ export const services: Service[] = [
     category: "Instagram",
     url: "https://buyshazam.com/product/instagram-likes/",
     price_options: {
-      "Female Likes": 0.0015,
-      "Male Likes": 0.0015,
-      "Dubai": 50.0,
-      "French": 50.0,
-      "Russia": 50.0
+      "Premium Quality": 0.002,
+      "High Quality": 0.0018
     }
   },
   {
@@ -53,13 +50,8 @@ export const services: Service[] = [
     category: "Instagram",
     url: "https://buyshazam.com/product/instagram-views/",
     price_options: {
-      "Views + Impressions": 0.0003,
-      "USA": 100.0,
-      "UK": 100.0,
-      "France": 100.0,
-      "Japan": 100.0,
-      "Dubai": 100.0,
-      "Arab": 100.0
+      "Views + Impressions": 0.0008,
+      "Premium Views": 0.001
     }
   },
   {
@@ -89,11 +81,6 @@ export const services: Service[] = [
     gradient: "from-purple-500 to-pink-500",
     category: "TikTok",
     url: "https://buyshazam.com/product/tiktok-likes/",
-    price_options: {
-      "USA": 50.0,
-      "Canada": 50.0,
-      "France": 50.0
-    }
   },
   {
     id: "youtube-views",
@@ -109,17 +96,8 @@ export const services: Service[] = [
     category: "YouTube",
     url: "https://buyshazam.com/product/youtube-views/",
     price_options: {
-      "UK": 99.0,
-      "Canada": 99.0,
-      "France": 99.0,
-      "Germany": 99.0,
-      "Italy": 99.0,
-      "India": 99.0,
-      "Japan": 99.0,
-      "Spain": 99.0,
-      "Russia": 99.0,
-      "Brazil": 99.0,
-      "Turkey": 99.0
+      "High Quality": 0.0035,
+      "Premium": 0.004
     }
   },
   {
@@ -150,10 +128,8 @@ export const services: Service[] = [
     category: "Instagram",
     url: "https://buyshazam.com/product/instagram-followers/",
     price_options: {
-      "Arab Iranian": 50.0,
-      "Indian": 80.0,
-      "Turkish": 50.0,
-      "Brazil": 80.0
+      "High Quality": 0.003,
+      "Premium": 0.0035
     }
   },
   {
@@ -169,10 +145,6 @@ export const services: Service[] = [
     gradient: "from-purple-500 to-pink-500",
     category: "TikTok",
     url: "https://buyshazam.com/product/tiktok-followers/",
-    price_options: {
-      "Canada": 50.0,
-      "France": 50.0
-    }
   },
   {
     id: "youtube-likes",
@@ -188,10 +160,8 @@ export const services: Service[] = [
     category: "YouTube",
     url: "https://buyshazam.com/product/youtube-likes/",
     price_options: {
-      "USA": 30.0,
-      "UK": 30.0,
-      "France": 30.0,
-      "Canada": 30.0
+      "High Quality": 0.015,
+      "Premium": 0.018
     }
   },
   {
@@ -222,16 +192,9 @@ export const services: Service[] = [
     category: "Spotify",
     url: "https://buyshazam.com/product/spotify-plays/",
     price_options: {
-      "USA": 60.0,
-      "EUROPE": 165.0,
-      "United Kingdom": 140.0,
-      "Germany": 165.0,
-      "France": 150.0,
-      "Italy": 150.0,
-      "Brazil": 150.0,
-      "Switzerland": 150.0,
-      "Turkey": 150.0,
-      "Premium": 80.0
+      "Standard": 0.0012,
+      "Premium": 0.0015,
+      "High Quality": 0.0018
     }
   },
   
@@ -378,10 +341,8 @@ export const services: Service[] = [
     category: "Spotify",
     url: "https://buyshazam.com/product/spotify-followers/",
     price_options: {
-      "USA": 60.0,
-      "EUROPE": 165.0,
-      "United Kingdom": 140.0,
-      "Germany": 165.0
+      "Standard": 0.0025,
+      "Premium": 0.003
     }
   },
   

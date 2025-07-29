@@ -10,6 +10,7 @@ import { Service } from "@/data/services";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { User } from "@supabase/supabase-js";
+import { X, Shield, Clock, Star, TrendingUp } from "lucide-react";
 
 interface OrderFlowProps {
   service: Service;
@@ -33,6 +34,8 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
   };
 
   const totalPrice = quantity * getPricePerUnit();
+  const savings = quantity >= 5000 ? totalPrice * 0.1 : 0;
+  const finalPrice = totalPrice - savings;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,7 +79,7 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
           platform: service.platform,
           quantity,
           target_url: targetUrl,
-          price_cents: Math.round(totalPrice * 100),
+          price_cents: Math.round(finalPrice * 100),
           order_notes: orderNotes.trim() || null,
         })
         .select()
@@ -88,7 +91,7 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
       const { data, error: functionError } = await supabase.functions.invoke('create-checkout-session', {
         body: {
           orderId: order.id,
-          amount: Math.round(totalPrice * 100),
+          amount: Math.round(finalPrice * 100),
           currency: 'eur',
           description: `${service.title} - ${quantity} ${service.unit}`,
         },
@@ -115,19 +118,50 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <span className="text-2xl">{service.icon}</span>
-            {service.title}
-          </CardTitle>
-          <CardDescription>{service.description}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+      <Card className="w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <CardHeader className="relative">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="absolute right-2 top-2"
+            onClick={onClose}
+          >
+            <X size={20} />
+          </Button>
+          
+          <div className="flex items-center gap-3 mb-2">
+            <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${service.gradient} flex items-center justify-center text-white text-xl`}>
+              {service.icon}
+            </div>
             <div>
-              <Label htmlFor="quantity">Hoeveelheid {service.unit}</Label>
-              <div className="space-y-3 mt-2">
+              <CardTitle className="text-xl">{service.title}</CardTitle>
+              <CardDescription className="text-sm">{service.platform}</CardDescription>
+            </div>
+          </div>
+
+          {/* Trust indicators */}
+          <div className="grid grid-cols-3 gap-2 mt-4">
+            <div className="text-center p-2 bg-green-50 dark:bg-green-900/20 rounded-lg">
+              <Shield className="w-4 h-4 text-green-600 mx-auto mb-1" />
+              <p className="text-xs text-green-700 dark:text-green-400 font-medium">Veilig</p>
+            </div>
+            <div className="text-center p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+              <Clock className="w-4 h-4 text-blue-600 mx-auto mb-1" />
+              <p className="text-xs text-blue-700 dark:text-blue-400 font-medium">Snel</p>
+            </div>
+            <div className="text-center p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+              <Star className="w-4 h-4 text-yellow-600 mx-auto mb-1" />
+              <p className="text-xs text-yellow-700 dark:text-yellow-400 font-medium">Kwaliteit</p>
+            </div>
+          </div>
+        </CardHeader>
+
+        <CardContent className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Quantity Selection */}
+            <div>
+              <Label className="text-base font-semibold">Hoeveel {service.unit} wil je bestellen?</Label>
+              <div className="space-y-4 mt-3">
                 <Slider
                   value={[quantity]}
                   onValueChange={(value) => setQuantity(value[0])}
@@ -136,78 +170,111 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
                   step={Math.max(1, Math.floor((service.maximum_order - service.minimum_order) / 1000))}
                   className="w-full"
                 />
-                <Input
-                  id="quantity"
-                  type="number"
-                  min={service.minimum_order}
-                  max={service.maximum_order}
-                  value={quantity}
-                  onChange={(e) => setQuantity(Math.min(service.maximum_order, Math.max(service.minimum_order, parseInt(e.target.value) || service.minimum_order)))}
-                  className="text-center font-medium"
-                />
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="number"
+                    min={service.minimum_order}
+                    max={service.maximum_order}
+                    value={quantity}
+                    onChange={(e) => setQuantity(Math.min(service.maximum_order, Math.max(service.minimum_order, parseInt(e.target.value) || service.minimum_order)))}
+                    className="text-center font-bold text-lg"
+                  />
+                  <span className="text-sm text-muted-foreground font-medium">{service.unit}</span>
+                </div>
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>Min: {service.minimum_order.toLocaleString()}</span>
+                  <span>Max: {service.maximum_order.toLocaleString()}</span>
+                </div>
               </div>
-              <p className="text-xs text-muted-foreground mt-1">
-                Min: {service.minimum_order.toLocaleString()}, Max: {service.maximum_order.toLocaleString()}
-              </p>
             </div>
 
+            {/* Quality Options */}
             {service.price_options && (
               <div>
-                <Label htmlFor="option">Opties</Label>
+                <Label className="text-base font-semibold">Kies je kwaliteit</Label>
                 <Select value={selectedOption} onValueChange={setSelectedOption}>
-                  <SelectTrigger className="mt-1">
+                  <SelectTrigger className="mt-2">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="standard">Standaard</SelectItem>
-                    {Object.keys(service.price_options).map((option) => (
+                    <SelectItem value="standard">
+                      <div className="flex justify-between items-center w-full">
+                        <span>Standaard</span>
+                        <span className="text-green-600 font-medium">€{(service.price_per_unit * quantity).toFixed(2)}</span>
+                      </div>
+                    </SelectItem>
+                    {Object.entries(service.price_options).map(([option, price]) => (
                       <SelectItem key={option} value={option}>
-                        {option} (+€{(service.price_options![option] * quantity).toFixed(2)})
+                        <div className="flex justify-between items-center w-full">
+                          <span>{option}</span>
+                          <span className="text-green-600 font-medium">€{(price * quantity).toFixed(2)}</span>
+                        </div>
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
+                <p className="text-xs text-muted-foreground mt-1">Hogere kwaliteit = betere resultaten</p>
               </div>
             )}
 
+            {/* URL Input */}
             <div>
-              <Label htmlFor="targetUrl">Post/Profiel URL</Label>
+              <Label className="text-base font-semibold">Link naar je {service.platform} post/profiel</Label>
               <Input
-                id="targetUrl"
                 type="url"
                 placeholder={`https://${service.platform.toLowerCase()}.com/...`}
                 value={targetUrl}
                 onChange={(e) => setTargetUrl(e.target.value)}
-                className="mt-1"
+                className="mt-2"
                 required
               />
+              <p className="text-xs text-muted-foreground mt-1">
+                Kopieer de volledige URL van je post of profiel
+              </p>
             </div>
 
+            {/* Optional Notes */}
             <div>
-              <Label htmlFor="notes">Opmerkingen (optioneel)</Label>
+              <Label className="text-base font-semibold">Extra instructies (optioneel)</Label>
               <Textarea
-                id="notes"
-                placeholder="Speciale instructies..."
+                placeholder="Speciale wensen of opmerkingen..."
                 value={orderNotes}
                 onChange={(e) => setOrderNotes(e.target.value)}
-                className="mt-1"
+                className="mt-2"
                 rows={3}
               />
             </div>
 
-            <div className="bg-muted p-3 rounded-lg">
+            {/* Price Summary */}
+            <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-4 space-y-3">
               <div className="flex justify-between items-center">
-                <span className="font-medium">Totaal:</span>
-                <span className="text-xl font-bold text-primary">
-                  €{totalPrice.toFixed(2)}
-                </span>
+                <span className="font-medium">Subtotaal:</span>
+                <span className="font-bold">€{totalPrice.toFixed(2)}</span>
               </div>
-              <p className="text-xs text-muted-foreground mt-1">
+              
+              {savings > 0 && (
+                <div className="flex justify-between items-center text-green-600">
+                  <span className="font-medium flex items-center gap-1">
+                    <TrendingUp size={16} />
+                    Bulk korting (10%):
+                  </span>
+                  <span className="font-bold">-€{savings.toFixed(2)}</span>
+                </div>
+              )}
+              
+              <div className="border-t pt-2 flex justify-between items-center">
+                <span className="text-lg font-bold">Totaal:</span>
+                <span className="text-2xl font-bold text-primary">€{finalPrice.toFixed(2)}</span>
+              </div>
+              
+              <p className="text-xs text-muted-foreground text-center">
                 €{getPricePerUnit().toFixed(4)} per {service.unit}
+                {quantity >= 5000 && " • Inclusief 10% bulk korting!"}
               </p>
             </div>
 
-            <div className="flex gap-2">
+            {/* Action Buttons */}
+            <div className="flex gap-3">
               <Button
                 type="button"
                 variant="outline"
@@ -219,11 +286,16 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="flex-1"
+                className="flex-1 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
               >
-                {isLoading ? "Bezig..." : "Bestellen"}
+                {isLoading ? "Wordt verwerkt..." : `Bestellen €${finalPrice.toFixed(2)}`}
               </Button>
             </div>
+
+            {/* Security notice */}
+            <p className="text-xs text-center text-muted-foreground">
+              🔒 Je wordt doorgestuurd naar een veilige betaalpagina
+            </p>
           </form>
         </CardContent>
       </Card>
