@@ -65,15 +65,21 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#diensten" className="text-foreground hover:text-primary transition-colors">
-              Diensten
-            </a>
-            <a href="#over-ons" className="text-foreground hover:text-primary transition-colors">
-              Over Ons
-            </a>
-            <a href="#faq" className="text-foreground hover:text-primary transition-colors">
-              FAQ
-            </a>
+            <Link to="/instagram" className="text-foreground hover:text-primary transition-colors">
+              Instagram
+            </Link>
+            <Link to="/youtube" className="text-foreground hover:text-primary transition-colors">
+              YouTube
+            </Link>
+            <Link to="/tiktok" className="text-foreground hover:text-primary transition-colors">
+              TikTok
+            </Link>
+            <Link to="/spotify" className="text-foreground hover:text-primary transition-colors">
+              Spotify
+            </Link>
+            <Link to="/linkedin" className="text-foreground hover:text-primary transition-colors">
+              LinkedIn
+            </Link>
             {isAdmin && (
               <Link to="/admin" className="text-foreground hover:text-primary transition-colors font-medium">
                 Admin

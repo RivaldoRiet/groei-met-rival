@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -22,12 +23,16 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button variant="hero" size="xl" className="min-w-48">
-              Nieuwe Bestelling
-            </Button>
-            <Button variant="outline" size="xl" className="min-w-48">
-              Bekijk Diensten
-            </Button>
+            <Link to="/instagram">
+              <Button variant="hero" size="xl" className="min-w-48">
+                Nieuwe Bestelling
+              </Button>
+            </Link>
+            <a href="#platforms">
+              <Button variant="outline" size="xl" className="min-w-48">
+                Bekijk Diensten
+              </Button>
+            </a>
           </div>
 
           {/* Features Grid */}
