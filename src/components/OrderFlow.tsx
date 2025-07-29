@@ -83,25 +83,20 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
 
       if (error) throw error;
 
-      // Proceed to Stripe checkout
-      const response = await fetch('https://hjclktpuipxrvhxvhfsb.supabase.co/functions/v1/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqY2xrdHB1aXB4cnZoeHZoZnNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3OTM0ODQsImV4cCI6MjA2OTM2OTQ4NH0.nVaO0ltK0aCYy53gY9RtcfVTYOB-eJV2OTUrEJdc36A'}`,
-        },
-        body: JSON.stringify({
+      // Call Stripe checkout edge function
+      const { data, error: functionError } = await supabase.functions.invoke('create-checkout-session', {
+        body: {
           orderId: order.id,
           amount: Math.round(totalPrice * 100),
           currency: 'eur',
           description: `${service.title} - ${quantity} ${service.unit}`,
-        }),
+        },
       });
 
-      const { sessionUrl } = await response.json();
-      
-      if (sessionUrl) {
-        window.location.href = sessionUrl;
+      if (functionError) throw functionError;
+
+      if (data?.sessionUrl) {
+        window.location.href = data.sessionUrl;
       } else {
         throw new Error('Kon geen checkout sessie aanmaken');
       }

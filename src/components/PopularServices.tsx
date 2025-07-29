@@ -4,6 +4,7 @@ import { services, getServiceById } from "@/data/services";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import OrderFlow from "./OrderFlow";
+import AuthModal from "./AuthModal";
 
 const PopularServices = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
@@ -31,12 +32,13 @@ const PopularServices = () => {
 
   const handleOrderClick = (serviceId: string) => {
     if (!user) {
-      // Redirect to login or show login modal
-      window.location.href = '/login';
+      setShowAuthModal(true);
       return;
     }
     setSelectedService(serviceId);
   };
+
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   return (
     <section className="py-20 bg-background">
@@ -95,6 +97,10 @@ const PopularServices = () => {
             user={user}
             onClose={() => setSelectedService(null)}
           />
+        )}
+
+        {showAuthModal && (
+          <AuthModal onClose={() => setShowAuthModal(false)} />
         )}
       </div>
     </section>
