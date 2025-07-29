@@ -7,6 +7,11 @@ import Index from "./pages/Index";
 import Success from "./pages/Success";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import Instagram from "./pages/Instagram";
+import YouTube from "./pages/YouTube";
+import TikTok from "./pages/TikTok";
+import Spotify from "./pages/Spotify";
+import LinkedIn from "./pages/LinkedIn";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +23,11 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/instagram" element={<Instagram />} />
+          <Route path="/youtube" element={<YouTube />} />
+          <Route path="/tiktok" element={<TikTok />} />
+          <Route path="/spotify" element={<Spotify />} />
+          <Route path="/linkedin" element={<LinkedIn />} />
           <Route path="/success" element={<Success />} />
           <Route path="/admin" element={<AdminDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
