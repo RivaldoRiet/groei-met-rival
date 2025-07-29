@@ -69,7 +69,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
             <div className="bg-gradient-to-r from-primary to-primary-dark text-primary-foreground rounded-lg p-2 font-bold text-lg md:text-xl">
-              R
+              B
             </div>
             <div className="hidden sm:block">
               <h1 className="text-lg md:text-xl font-bold text-foreground">BoostDirect</h1>
