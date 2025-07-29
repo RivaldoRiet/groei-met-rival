@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import OrderFlow from "./OrderFlow";
 import AuthModal from "./AuthModal";
+import { Rocket, ShoppingCart, Heart, Eye, Users, ThumbsUp, MessageCircle, Share, Bookmark, Play, Smartphone, Film, LucideIcon } from "lucide-react";
 
 interface ServiceCardProps {
   service: Service;
@@ -28,6 +29,33 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
     return () => subscription.unsubscribe();
   }, []);
 
+  const getIcon = (iconName: string): LucideIcon => {
+    const iconMap: { [key: string]: LucideIcon } = {
+      "Heart": Heart,
+      "Eye": Eye,
+      "Users": Users,
+      "ThumbsUp": ThumbsUp,
+      "MessageCircle": MessageCircle,
+      "Share": Share,
+      "Bookmark": Bookmark,
+      "Play": Play,
+      "Smartphone": Smartphone,
+      "Film": Film,
+      "👁️": Eye,
+      "❤️": Heart,
+      "👥": Users,
+      "👍": ThumbsUp,
+      "💬": MessageCircle,
+      "📤": Share,
+      "🔖": Bookmark,
+      "▶️": Play,
+      "📱": Smartphone,
+      "🎬": Film,
+      "📺": Play
+    };
+    return iconMap[iconName] || Heart;
+  };
+
   const handleOrderClick = (serviceId: string) => {
     if (!user) {
       setShowAuthModal(true);
@@ -36,12 +64,14 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
     setSelectedService(serviceId);
   };
 
+  const IconComponent = getIcon(service.icon);
+
   return (
     <>
       <Card className="h-full flex flex-col hover:shadow-xl transition-all duration-300 border border-border hover:border-primary/30 group hover:scale-[1.02]">
         <CardHeader className="pb-4">
-          <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${service.gradient} flex items-center justify-center text-white text-2xl mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
-            {service.icon}
+          <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${service.gradient} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
+            <IconComponent size={24} />
           </div>
           
           <div className="space-y-2">
@@ -84,8 +114,8 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
             </div>
             
             <div className="text-center">
-              <div className="text-xs text-muted-foreground mb-2">
-                🚀 Je krijgt: <span className="font-semibold text-foreground">{service.unit}</span> voor je {service.platform.toLowerCase()} account
+              <div className="text-xs text-muted-foreground mb-2 flex items-center justify-center gap-1">
+                <Rocket size={14} /> Je krijgt: <span className="font-semibold text-foreground">{service.unit}</span> voor je {service.platform.toLowerCase()} account
               </div>
             </div>
           </div>
@@ -94,10 +124,11 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         <CardFooter className="pt-0">
           <Button 
             variant="outline" 
-            className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors h-12 font-semibold"
+            className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors h-12 font-semibold flex items-center gap-2"
             onClick={() => handleOrderClick(service.id)}
           >
-            🛒 Bestellen vanaf €{(service.price_per_unit * service.minimum_order).toFixed(2)}
+            <ShoppingCart size={16} />
+            Bestellen vanaf €{(service.price_per_unit * service.minimum_order).toFixed(2)}
           </Button>
         </CardFooter>
       </Card>

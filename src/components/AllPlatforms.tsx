@@ -1,15 +1,16 @@
+import { getServicesByPlatform } from "@/data/services";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { getServicesByPlatform } from "@/data/services";
+import { Instagram, Youtube, Music, Briefcase, MessageCircle, Camera } from "lucide-react";
 
 const AllPlatforms = () => {
   const platforms = [
-    { name: "Instagram", services: getServicesByPlatform("Instagram").length, icon: "📸", color: "from-pink-500 to-rose-500", path: "/instagram" },
-    { name: "YouTube", services: getServicesByPlatform("YouTube").length, icon: "📺", color: "from-red-500 to-red-600", path: "/youtube" },
-    { name: "TikTok", services: getServicesByPlatform("TikTok").length, icon: "🎵", color: "from-purple-500 to-pink-500", path: "/tiktok" },
-    { name: "Spotify", services: getServicesByPlatform("Spotify").length, icon: "🎵", color: "from-green-500 to-green-600", path: "/spotify" },
-    { name: "LinkedIn", services: getServicesByPlatform("LinkedIn").length, icon: "💼", color: "from-blue-700 to-blue-800", path: "/linkedin" },
-    { name: "Threads", services: getServicesByPlatform("Threads").length, icon: "🧵", color: "from-gray-500 to-black", path: "/threads" },
+    { name: "Instagram", services: getServicesByPlatform("Instagram").length, icon: Instagram, color: "from-pink-500 to-rose-500", path: "/instagram" },
+    { name: "YouTube", services: getServicesByPlatform("YouTube").length, icon: Youtube, color: "from-red-500 to-red-600", path: "/youtube" },
+    { name: "TikTok", services: getServicesByPlatform("TikTok").length, icon: Music, color: "from-purple-500 to-pink-500", path: "/tiktok" },
+    { name: "Spotify", services: getServicesByPlatform("Spotify").length, icon: Music, color: "from-green-500 to-green-600", path: "/spotify" },
+    { name: "LinkedIn", services: getServicesByPlatform("LinkedIn").length, icon: Briefcase, color: "from-blue-700 to-blue-800", path: "/linkedin" },
+    { name: "Threads", services: getServicesByPlatform("Threads").length, icon: MessageCircle, color: "from-gray-500 to-black", path: "/threads" },
   ];
 
   return (
@@ -28,7 +29,7 @@ const AllPlatforms = () => {
           {platforms.map((platform, index) => (
             <Link key={index} to={platform.path} className="bg-card rounded-xl p-4 md:p-6 text-center hover:shadow-lg transition-all duration-300 border border-border hover:border-primary/20 group block">
               <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r ${platform.color} flex items-center justify-center text-white text-xl md:text-2xl mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
-                {platform.icon}
+                <platform.icon size={20} />
               </div>
               <h3 className="font-semibold text-sm md:text-base mb-1 group-hover:text-primary transition-colors">
                 {platform.name}

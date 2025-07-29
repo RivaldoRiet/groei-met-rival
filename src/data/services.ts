@@ -27,7 +27,7 @@ export const services: Service[] = [
     minimum_order: 100,
     maximum_order: 25000,
     unit: "likes",
-    icon: "❤️",
+    icon: "Heart",
     gradient: "from-pink-500 to-rose-500",
     category: "Instagram",
     url: "https://buyshazam.com/product/instagram-likes/",
@@ -48,7 +48,7 @@ export const services: Service[] = [
     minimum_order: 300,
     maximum_order: 60000,
     unit: "views",
-    icon: "👁️",
+    icon: "Eye",
     gradient: "from-pink-500 to-rose-500",
     category: "Instagram",
     url: "https://buyshazam.com/product/instagram-views/",
@@ -627,10 +627,10 @@ export const getServiceById = (id: string) => {
 };
 
 export const platforms = [
-  { name: "Instagram", path: "/instagram", icon: "📸", gradient: "from-pink-500 to-rose-500" },
-  { name: "YouTube", path: "/youtube", icon: "📺", gradient: "from-red-500 to-red-600" },
-  { name: "TikTok", path: "/tiktok", icon: "🎵", gradient: "from-purple-500 to-pink-500" },
-  { name: "Spotify", path: "/spotify", icon: "🎵", gradient: "from-green-500 to-green-600" },
-  { name: "LinkedIn", path: "/linkedin", icon: "💼", gradient: "from-blue-600 to-blue-700" },
-  { name: "Threads", path: "/threads", icon: "🧵", gradient: "from-gray-500 to-black" },
+  { name: "Instagram", path: "/instagram", icon: "Instagram", gradient: "from-pink-500 to-rose-500" },
+  { name: "YouTube", path: "/youtube", icon: "Youtube", gradient: "from-red-500 to-red-600" },
+  { name: "TikTok", path: "/tiktok", icon: "Music", gradient: "from-purple-500 to-pink-500" },
+  { name: "Spotify", path: "/spotify", icon: "Music", gradient: "from-green-500 to-green-600" },
+  { name: "LinkedIn", path: "/linkedin", icon: "Briefcase", gradient: "from-blue-600 to-blue-700" },
+  { name: "Threads", path: "/threads", icon: "MessageCircle", gradient: "from-gray-500 to-black" },
 ];

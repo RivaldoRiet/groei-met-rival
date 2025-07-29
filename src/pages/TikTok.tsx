@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getServicesByPlatform } from "@/data/services";
 import ServiceCard from "@/components/ServiceCard";
+import { Music } from "lucide-react";
 
 const TikTok = () => {
   const tiktokServices = getServicesByPlatform("TikTok");
@@ -14,8 +15,8 @@ const TikTok = () => {
         <section className="py-16 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-800">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white text-2xl mb-4">
-                🎵
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white mb-4">
+                <Music size={28} />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 TikTok Services

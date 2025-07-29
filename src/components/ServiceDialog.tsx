@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, X, Instagram, Youtube, Music, Linkedin, MessageSquare, ArrowLeft } from "lucide-react";
+import { Search, X, Instagram, Youtube, Music, Linkedin, MessageSquare, ArrowLeft, Rocket, Smartphone } from "lucide-react";
 import { services, getServicesByPlatform } from "@/data/services";
 import ServiceCard from "./ServiceCard";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -86,8 +86,11 @@ const ServiceDialog = ({ open, onClose }: ServiceDialogProps) => {
       <DialogContent className="max-w-7xl max-h-[90vh] overflow-hidden flex flex-col">
         <DialogHeader className="border-b pb-6">
           <div className="flex items-center justify-between">
-            <DialogTitle className="text-2xl font-bold">
-              {selectedPlatform === "home" ? "🚀 Kies je Social Media Platform" : `📱 ${selectedPlatform} Services`}
+            <DialogTitle className="text-2xl font-bold flex items-center gap-2">
+              {selectedPlatform === "home" ? 
+                <><Rocket size={24} /> Kies je Social Media Platform</> : 
+                <><Smartphone size={24} /> {selectedPlatform} Services</>
+              }
             </DialogTitle>
             <Button variant="ghost" size="sm" onClick={onClose}>
               <X size={20} />
