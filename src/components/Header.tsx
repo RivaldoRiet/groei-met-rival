@@ -5,7 +5,7 @@ import { User } from "@supabase/supabase-js";
 import AuthModal from "./AuthModal";
 import { CartSidebar } from "./CartSidebar";
 import { Link } from "react-router-dom";
-import { ChevronDown, Menu, X, Instagram, Youtube, Music, Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle } from "lucide-react";
+import { ChevronDown, Menu, X, Instagram, Youtube, Music, Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle, Eye, Heart, Users, Bookmark, Share, Play, ThumbsUp, ThumbsDown, ArrowUp, Flame, Crown, Zap, Frown, Laugh, Shield, Plus } from "lucide-react";
 import { getServicesByPlatform, serviceCategories } from "@/data/services";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -19,7 +19,8 @@ const Header = () => {
 
   const getIconComponent = (iconName: string) => {
     const icons: { [key: string]: any } = {
-      Instagram, Youtube, Music, Music2: Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle
+      Instagram, Youtube, Music, Music2: Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle,
+      Eye, Heart, Users, Bookmark, Share, Play, ThumbsUp, ThumbsDown, ArrowUp, Flame, Crown, Zap, Frown, Laugh, Shield, Plus
     };
     return icons[iconName] || Instagram;
   };

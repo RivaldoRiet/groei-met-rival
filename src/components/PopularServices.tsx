@@ -5,7 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import OrderFlow from "./OrderFlow";
 import AuthModal from "./AuthModal";
-import { Instagram, Youtube, Music, Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle } from "lucide-react";
+import { Instagram, Youtube, Music, Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle, Eye, Heart, Users, Bookmark, Share, Play, ThumbsUp, ThumbsDown, ArrowUp, Flame, Crown, Zap, Frown, Laugh, Shield, Plus } from "lucide-react";
+import { getServiceIcon } from "@/utils/iconUtils";
 
 const PopularServices = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
@@ -13,9 +14,10 @@ const PopularServices = () => {
 
   const getIconComponent = (iconName: string) => {
     const icons: { [key: string]: any } = {
-      Instagram, Youtube, Music, Music2: Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle
+      Instagram, Youtube, Music, Music2: Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle,
+      Eye, Heart, Users, Bookmark, Share, Play, ThumbsUp, ThumbsDown, ArrowUp, Flame, Crown, Zap, Frown, Laugh, Shield, Plus
     };
-    return icons[iconName] || Instagram;
+    return icons[iconName] || Eye;
   };
 
   // Get user state
@@ -62,7 +64,9 @@ const PopularServices = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {popularServices.map((service, index) => {
-            const IconComponent = getIconComponent(service.icon);
+            // Use better icon logic
+            const iconName = service.icon || getServiceIcon(service.title, service.unit);
+            const IconComponent = getIconComponent(iconName);
             return (
             <div key={index} className="bg-card rounded-xl p-4 md:p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-border hover:border-primary/20 group">
               <div className={`w-12 h-12 md:w-14 md:h-14 rounded-lg bg-gradient-to-r ${service.gradient} flex items-center justify-center text-white text-xl md:text-2xl mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
