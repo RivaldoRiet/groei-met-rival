@@ -9,13 +9,12 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { User } from '@supabase/supabase-js';
 import { ShoppingCart, CreditCard, Shield, ArrowLeft, Trash2 } from 'lucide-react';
-import { trackPurchase, trackBeginCheckout } from '@/lib/analytics';
+import { trackPurchase } from '@/lib/analytics';
 
 const Checkout = () => {
   const { items, removeFromCart, getTotalPrice, clearCart } = useCart();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -38,13 +37,6 @@ const Checkout = () => {
     }
   }, [items.length, navigate]);
 
-  // Track begin checkout when component loads
-  useEffect(() => {
-    if (items.length > 0) {
-      const totalValue = getTotalPrice();
-      trackBeginCheckout('Multiple Services', totalValue);
-    }
-  }, [items, getTotalPrice]);
   const handleCheckout = async () => {
     if (!user) {
       toast({
@@ -52,19 +44,11 @@ const Checkout = () => {
         description: "Je moet ingelogd zijn om een bestelling te plaatsen.",
         variant: "destructive",
       });
+      navigate('/auth');
       return;
     }
 
-    if (items.length === 0) {
-      toast({
-        title: "Winkelwagen leeg",
-        description: "Voeg eerst items toe aan je winkelwagen.",
-        variant: "destructive",
-      });
-      return;
-    }
     setIsLoading(true);
-    setError(null);
 
     try {
       // Create orders for each cart item
@@ -79,7 +63,6 @@ const Checkout = () => {
             target_url: item.targetUrl,
             price_cents: Math.round(item.totalPrice * 100),
             order_notes: item.orderNotes || null,
-            status: 'pending',
           })
           .select()
           .single();
@@ -105,11 +88,6 @@ const Checkout = () => {
         })),
       });
 
-      // Get auth token for the edge function
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session?.access_token) {
-        throw new Error('Geen geldige sessie gevonden');
-      }
       // Create a single Stripe checkout session for all orders
       const { data, error: functionError } = await supabase.functions.invoke('create-checkout-session', {
         body: {
@@ -117,9 +95,6 @@ const Checkout = () => {
           amount: Math.round(totalValue * 100),
           currency: 'eur',
           description: `Bestelling - ${items.length} service(s)`,
-        },
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
         },
       });
 
@@ -130,14 +105,13 @@ const Checkout = () => {
         clearCart();
         window.location.href = data.sessionUrl;
       } else {
-        throw new Error('Geen checkout URL ontvangen van de server');
+        throw new Error('Kon geen checkout sessie aanmaken');
       }
     } catch (error) {
       console.error('Checkout error:', error);
-      setError(error.message || 'Er is een onbekende fout opgetreden');
       toast({
         title: "Fout bij checkout",
-        description: error.message || "Er is een fout opgetreden. Probeer het opnieuw.",
+        description: "Er is een fout opgetreden. Probeer het opnieuw.",
         variant: "destructive",
       });
     } finally {
@@ -171,16 +145,6 @@ const Checkout = () => {
           </p>
         </div>
 
-        {error && (
-          <Card className="mb-6 border-destructive">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 text-destructive">
-                <span className="font-medium">Fout:</span>
-                <span>{error}</span>
-              </div>
-            </CardContent>
-          </Card>
-        )}
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Order Items */}
           <div className="lg:col-span-2 space-y-4">
@@ -279,16 +243,9 @@ const Checkout = () => {
                   <span>€{(getTotalPrice() * 1.21).toFixed(2)}</span>
                 </div>
                 
-                {!user && (
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm">
-                    <p className="text-yellow-800 font-medium mb-2">Inloggen vereist</p>
-                    <p className="text-yellow-700">Je moet ingelogd zijn om een bestelling te plaatsen.</p>
-                  </div>
-                )}
-                
                 <Button
                   onClick={handleCheckout}
-                  disabled={isLoading || !user}
+                  disabled={isLoading}
                   className="w-full h-12 text-base"
                 >
                   {isLoading ? (

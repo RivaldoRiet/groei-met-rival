@@ -1,13 +1,13 @@
-import { createClient } from 'npm:@supabase/supabase-js@2.53.0';
-import Stripe from 'npm:stripe@18.3.0';
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import Stripe from "https://esm.sh/stripe@14.21.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
-Deno.serve(async (req) => {
+serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
@@ -40,10 +40,6 @@ Deno.serve(async (req) => {
 
     const { orderId, amount, currency = 'eur', description } = await req.json();
 
-    if (!orderId || !amount) {
-      throw new Error("Missing required parameters: orderId and amount");
-    }
-
     // Check if customer already exists in Stripe
     const existingCustomers = await stripe.customers.list({
       email: userEmail,
@@ -68,14 +64,13 @@ Deno.serve(async (req) => {
 
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
-      payment_method_types: ['card', 'ideal'],
+      payment_method_types: ['card', 'ideal', 'bancontact'],
       line_items: [
         {
           price_data: {
             currency,
             product_data: {
-              name: description || 'BoostDirect Social Media Services',
-              description: `Bestelling ${orderId}`,
+              name: description || 'Social Media Service',
             },
             unit_amount: amount,
           },
@@ -84,27 +79,19 @@ Deno.serve(async (req) => {
       ],
       mode: 'payment',
       success_url: `${req.headers.get('origin')}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}`,
-      cancel_url: `${req.headers.get('origin')}/checkout`,
+      cancel_url: `${req.headers.get('origin')}/`,
       customer_update: {
-        name: 'never',
-        address: 'never',
+        name: 'never', // Don't ask for name since we have customer email
+        address: 'never', // Don't ask for address for digital services
       },
       metadata: {
         orderId,
         user_email: userEmail,
-        user_id: userData.user.id,
       },
-      billing_address_collection: 'auto',
-      shipping_address_collection: undefined,
     });
 
-    console.log(`Checkout session created: ${session.id}`);
-
     return new Response(
-      JSON.stringify({ 
-        sessionUrl: session.url,
-        sessionId: session.id 
-      }),
+      JSON.stringify({ sessionUrl: session.url }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200,
@@ -113,10 +100,7 @@ Deno.serve(async (req) => {
   } catch (error) {
     console.error('Error creating checkout session:', error);
     return new Response(
-      JSON.stringify({ 
-        error: error.message,
-        details: 'Failed to create checkout session'
-      }),
+      JSON.stringify({ error: error.message }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 400,
