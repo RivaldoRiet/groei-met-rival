@@ -5,8 +5,8 @@ import { User } from "@supabase/supabase-js";
 import AuthModal from "./AuthModal";
 import { CartSidebar } from "./CartSidebar";
 import { Link } from "react-router-dom";
-import { ChevronDown, Menu, X, Instagram, Youtube, Music, Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle, Eye, Heart, Users, Bookmark, Share, Play, ThumbsUp, ThumbsDown, ArrowUp, Flame, Crown, Zap, Frown, Laugh, Shield, Plus } from "lucide-react";
-import { getServicesByPlatform, serviceCategories } from "@/data/services";
+import { ChevronDown, Menu, X, Instagram, Youtube, Music, Music2, Linkedin } from "lucide-react";
+import { getServicesByPlatform } from "@/data/services";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Header = () => {
@@ -17,13 +17,13 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isMobile = useIsMobile();
 
-  const getIconComponent = (iconName: string) => {
-    const icons: { [key: string]: any } = {
-      Instagram, Youtube, Music, Music2: Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle,
-      Eye, Heart, Users, Bookmark, Share, Play, ThumbsUp, ThumbsDown, ArrowUp, Flame, Crown, Zap, Frown, Laugh, Shield, Plus
-    };
-    return icons[iconName] || Instagram;
-  };
+  const platforms = [
+    { name: "Instagram", path: "/instagram", icon: "Instagram" },
+    { name: "YouTube", path: "/youtube", icon: "Youtube" },
+    { name: "TikTok", path: "/tiktok", icon: "Music" },
+    { name: "Spotify", path: "/spotify", icon: "Music2" },
+    { name: "LinkedIn", path: "/linkedin", icon: "Linkedin" },
+  ];
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -59,13 +59,6 @@ const Header = () => {
     }
   };
 
-  const handleAuthModal = () => {
-    const currentPath = window.location.pathname;
-    setShowAuthModal(true);
-    // Store current path in localStorage for redirect after auth
-    localStorage.setItem('auth_redirect_path', currentPath);
-  };
-
   const handleSignOut = async () => {
     await supabase.auth.signOut();
   };
@@ -89,47 +82,63 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            {serviceCategories.map((category) => (
-              <div
-                key={category.name}
-                className="relative"
-                onMouseEnter={() => setActiveDropdown(category.name)}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <button className="flex items-center space-x-1 text-foreground hover:text-primary transition-colors">
-                  <span>{category.name}</span>
-                  <ChevronDown size={16} />
-                </button>
-                
-                {activeDropdown === category.name && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-background border border-border rounded-lg shadow-lg z-50">
-                    <div className="p-4">
-                      <div className="grid gap-2">
-                        {category.platforms.map((platform) => {
-                          const IconComponent = getIconComponent(platform.icon);
-                          const platformServices = getServicesByPlatform(platform.name);
-                          return (
+            {platforms.map((platform) => {
+              const platformServices = getServicesByPlatform(platform.name);
+              const IconComponent = platform.name === "Instagram" ? Instagram : 
+                                   platform.name === "YouTube" ? Youtube :
+                                   platform.name === "TikTok" ? Music :
+                                   platform.name === "Spotify" ? Music2 :
+                                   platform.name === "LinkedIn" ? Linkedin : Instagram;
+              return (
+                <div
+                  key={platform.name}
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown(platform.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <Link
+                    to={platform.path}
+                    className="flex items-center space-x-1 text-foreground hover:text-primary transition-colors"
+                  >
+                    <IconComponent size={16} />
+                    <span>{platform.name}</span>
+                    <ChevronDown size={16} />
+                  </Link>
+                  
+                  {activeDropdown === platform.name && (
+                    <div className="absolute top-full left-0 mt-2 w-80 bg-background border border-border rounded-lg shadow-lg z-50">
+                      <div className="p-4 max-h-96 overflow-y-auto">
+                        <div className="grid gap-2">
+                          {platformServices.slice(0, 8).map((service) => (
                             <Link
-                              key={platform.name}
+                              key={service.id}
                               to={platform.path}
                               className="flex items-center space-x-3 p-2 hover:bg-muted rounded-lg transition-colors"
                             >
-                              <IconComponent size={16} />
+                              <span className="text-lg">{service.icon}</span>
                               <div className="flex-1">
-                                <div className="font-medium text-sm">{platform.name}</div>
+                                <div className="font-medium text-sm">{service.title}</div>
                                 <div className="text-xs text-muted-foreground">
-                                  {platformServices.length} services beschikbaar
+                                  Vanaf €{(service.price_per_unit * service.minimum_order).toFixed(2)}
                                 </div>
                               </div>
                             </Link>
-                          );
-                        })}
+                          ))}
+                          {platformServices.length > 8 && (
+                            <Link
+                              to={platform.path}
+                              className="text-center p-2 text-sm text-primary hover:bg-muted rounded-lg transition-colors"
+                            >
+                              +{platformServices.length - 8} meer services →
+                            </Link>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
             {isAdmin && (
               <Link to="/admin" className="text-foreground hover:text-primary transition-colors font-medium">
                 Admin
@@ -163,7 +172,7 @@ const Header = () => {
                 </Button>
               </div>
             ) : (
-              <Button variant="hero" size="sm" onClick={handleAuthModal}>
+              <Button variant="hero" size="sm" onClick={() => setShowAuthModal(true)}>
                 Inloggen
               </Button>
             )}
@@ -173,27 +182,24 @@ const Header = () => {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-border pt-4 space-y-2">
-            {serviceCategories.map((category) => (
-              <div key={category.name} className="space-y-2">
-                <div className="px-2 py-1 text-sm font-semibold text-muted-foreground">
-                  {category.name}
-                </div>
-                {category.platforms.map((platform) => {
-                  const IconComponent = getIconComponent(platform.icon);
-                  return (
-                    <Link
-                      key={platform.name}
-                      to={platform.path}
-                      className="flex items-center space-x-3 py-2 px-4 rounded-lg hover:bg-muted transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <IconComponent size={18} />
-                      <span className="font-medium">{platform.name}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-            ))}
+            {platforms.map((platform) => {
+              const IconComponent = platform.name === "Instagram" ? Instagram : 
+                                   platform.name === "YouTube" ? Youtube :
+                                   platform.name === "TikTok" ? Music :
+                                   platform.name === "Spotify" ? Music2 :
+                                   platform.name === "LinkedIn" ? Linkedin : Instagram;
+              return (
+                <Link
+                  key={platform.name}
+                  to={platform.path}
+                  className="flex items-center space-x-3 py-3 px-2 rounded-lg hover:bg-muted transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <IconComponent size={20} />
+                  <span className="font-medium">{platform.name}</span>
+                </Link>
+              );
+            })}
             
             <div className="pt-4 border-t border-border mt-4">
               <div className="flex items-center justify-between mb-3">
@@ -211,7 +217,7 @@ const Header = () => {
                   </Button>
                 </div>
               ) : (
-                <Button variant="hero" onClick={handleAuthModal} className="w-full">
+                <Button variant="hero" onClick={() => setShowAuthModal(true)} className="w-full">
                   Inloggen
                 </Button>
               )}
@@ -231,10 +237,7 @@ const Header = () => {
       </div>
       
       {showAuthModal && (
-        <AuthModal 
-          onClose={() => setShowAuthModal(false)} 
-          redirectPath={localStorage.getItem('auth_redirect_path') || undefined}
-        />
+        <AuthModal onClose={() => setShowAuthModal(false)} />
       )}
     </header>
   );
