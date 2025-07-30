@@ -5,10 +5,18 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import OrderFlow from "./OrderFlow";
 import AuthModal from "./AuthModal";
+import { Instagram, Youtube, Music, Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle } from "lucide-react";
 
 const PopularServices = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
+
+  const getIconComponent = (iconName: string) => {
+    const icons: { [key: string]: any } = {
+      Instagram, Youtube, Music, Music2: Music2, Linkedin, Facebook, Twitter, Send, Tv, MessageSquare, Film, Star, Video, Search, MessageCircle
+    };
+    return icons[iconName] || Instagram;
+  };
 
   // Get user state
   useEffect(() => {
@@ -53,10 +61,12 @@ const PopularServices = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {popularServices.map((service, index) => (
+          {popularServices.map((service, index) => {
+            const IconComponent = getIconComponent(service.icon);
+            return (
             <div key={index} className="bg-card rounded-xl p-4 md:p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-border hover:border-primary/20 group">
               <div className={`w-12 h-12 md:w-14 md:h-14 rounded-lg bg-gradient-to-r ${service.gradient} flex items-center justify-center text-white text-xl md:text-2xl mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
-                {service.icon}
+                <IconComponent size={24} />
               </div>
               
               <h3 className="text-lg md:text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
@@ -88,7 +98,8 @@ const PopularServices = () => {
                 </Button>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {selectedService && (
