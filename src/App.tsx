@@ -13,6 +13,10 @@ import TikTok from "./pages/TikTok";
 import Spotify from "./pages/Spotify";
 import LinkedIn from "./pages/LinkedIn";
 import Threads from "./pages/Threads";
+import Facebook from "./pages/Facebook";
+import Twitter from "./pages/Twitter";
+import Telegram from "./pages/Telegram";
+import AppleMusic from "./pages/AppleMusic";
 import GoogleAdsSetup from "./components/GoogleAdsSetup";
 import About from "./pages/About";
 import News from "./pages/News";
@@ -23,6 +27,7 @@ import FAQ from "./pages/FAQ";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ReturnPolicy from "./pages/ReturnPolicy";
+import Checkout from "./pages/Checkout";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +42,18 @@ const AppRoutes = () => {
       <Route path="/spotify" element={<Spotify />} />
       <Route path="/linkedin" element={<LinkedIn />} />
       <Route path="/threads" element={<Threads />} />
+      <Route path="/facebook" element={<Facebook />} />
+      <Route path="/twitter" element={<Twitter />} />
+      <Route path="/telegram" element={<Telegram />} />
+      <Route path="/apple-music" element={<AppleMusic />} />
+      <Route path="/soundclick" element={<AppleMusic />} />
+      <Route path="/google-play" element={<AppleMusic />} />
+      <Route path="/twitch" element={<AppleMusic />} />
+      <Route path="/reddit" element={<AppleMusic />} />
+      <Route path="/imdb" element={<AppleMusic />} />
+      <Route path="/rotten-tomatoes" element={<AppleMusic />} />
+      <Route path="/vimeo" element={<AppleMusic />} />
+      <Route path="/google" element={<AppleMusic />} />
       <Route path="/success" element={<Success />} />
       <Route path="/google-ads-setup" element={<GoogleAdsSetup />} />
       <Route path="/admin" element={<AdminDashboard />} />
@@ -49,6 +66,7 @@ const AppRoutes = () => {
       <Route path="/gebruiksvoorwaarden" element={<TermsOfService />} />
       <Route path="/privacybeleid" element={<PrivacyPolicy />} />
       <Route path="/retourbeleid" element={<ReturnPolicy />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

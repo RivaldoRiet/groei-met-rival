@@ -6,8 +6,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import OrderFlow from "./OrderFlow";
 import AuthModal from "./AuthModal";
-import { Rocket, ShoppingCart, Heart, Eye, Users, ThumbsUp, MessageCircle, Share, Bookmark, Play, Smartphone, Film, LucideIcon, Instagram, Youtube, Music, Linkedin } from "lucide-react";
+import { Rocket, ShoppingCart, Heart, Eye, Users, ThumbsUp, MessageCircle, Share, Bookmark, Play, Smartphone, Film, LucideIcon, Instagram, Youtube, Music, Linkedin, Facebook, Twitter, Send, Tv, Star, Video, Search, Music2, ThumbsDown, ArrowUp, Flame, Crown, Zap, Frown, Laugh, Shield, Plus } from "lucide-react";
 import { trackServiceView, trackAddToCart } from "@/lib/analytics";
+import { getServiceIcon } from "@/utils/iconUtils";
 
 interface ServiceCardProps {
   service: Service;
@@ -41,6 +42,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       "Eye": Eye,
       "Users": Users,
       "ThumbsUp": ThumbsUp,
+      "ThumbsDown": ThumbsDown,
       "MessageCircle": MessageCircle,
       "Share": Share,
       "Bookmark": Bookmark,
@@ -50,21 +52,50 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       "Instagram": Instagram,
       "Youtube": Youtube,
       "Music": Music,
+      "Music2": Music2,
       "Linkedin": Linkedin,
+      "Facebook": Facebook,
+      "Twitter": Twitter,
+      "Send": Send,
+      "Tv": Tv,
+      "Star": Star,
+      "Video": Video,
+      "Search": Search,
+      "ArrowUp": ArrowUp,
+      "Flame": Flame,
+      "Crown": Crown,
+      "Zap": Zap,
+      "Frown": Frown,
+      "Laugh": Laugh,
+      "Shield": Shield,
+      "Plus": Plus,
+      // Emoji fallbacks
       "👁️": Eye,
       "❤️": Heart,
       "👥": Users,
       "👍": ThumbsUp,
+      "👎": ThumbsDown,
       "💬": MessageCircle,
       "📤": Share,
       "🔖": Bookmark,
       "▶️": Play,
       "📱": Smartphone,
       "🎬": Film,
-      "📺": Play
+      "📺": Play,
+      "🔥": Flame,
+      "👑": Crown,
+      "⚡": Zap,
+      "😢": Frown,
+      "😂": Laugh,
+      "🛡️": Shield,
+      "➕": Plus
     };
-    return iconMap[iconName] || Heart;
+    return iconMap[iconName] || Eye;
   };
+
+  // Get the best icon for this service
+  const serviceIconName = service.icon || getServiceIcon(service.title, service.unit);
+  const ServiceIconComponent = getIcon(serviceIconName);
 
   const handleOrderClick = (serviceId: string) => {
     // Track add to cart event
@@ -77,14 +108,12 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
     setSelectedService(serviceId);
   };
 
-  const IconComponent = getIcon(service.icon);
-
   return (
     <>
       <Card className="h-full flex flex-col hover:shadow-xl transition-all duration-300 border border-border hover:border-primary/30 group hover:scale-[1.02]">
         <CardHeader className="pb-4">
           <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${service.gradient} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
-            <IconComponent size={24} />
+            <ServiceIconComponent size={24} />
           </div>
           
           <div className="space-y-2">

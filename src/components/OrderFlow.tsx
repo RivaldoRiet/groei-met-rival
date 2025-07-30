@@ -7,11 +7,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Service } from "@/data/services";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { User } from "@supabase/supabase-js";
-import { X, Shield, Clock, Star, TrendingUp } from "lucide-react";
-import { trackBeginCheckout, trackPurchase } from "@/lib/analytics";
+import { X, Shield, Clock, Star, TrendingUp, ShoppingCart } from "lucide-react";
+import { trackAddToCart } from "@/lib/analytics";
+import { useCart } from "@/contexts/CartContext";
 
 interface OrderFlowProps {
   service: Service;
@@ -24,14 +24,8 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
   const [targetUrl, setTargetUrl] = useState("");
   const [selectedOption, setSelectedOption] = useState("standard");
   const [orderNotes, setOrderNotes] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-
-  // Track begin checkout when component mounts
-  useEffect(() => {
-    const totalPrice = quantity * getPricePerUnit();
-    trackBeginCheckout(service.title, totalPrice);
-  }, [service, quantity]);
+  const { addToCart } = useCart();
 
   const getPricePerUnit = () => {
 
@@ -45,17 +39,8 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
   const savings = quantity >= 5000 ? totalPrice * 0.1 : 0;
   const finalPrice = totalPrice - savings;
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleAddToCart = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!user) {
-      toast({
-        title: "Inloggen vereist",
-        description: "Je moet ingelogd zijn om een bestelling te plaatsen.",
-        variant: "destructive",
-      });
-      return;
-    }
 
     if (quantity < service.minimum_order || quantity > service.maximum_order) {
       toast({
@@ -75,67 +60,25 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
       return;
     }
 
-    setIsLoading(true);
+    // Add item to cart
+    addToCart({
+      service,
+      quantity,
+      targetUrl: targetUrl.trim(),
+      selectedOption,
+      orderNotes: orderNotes.trim() || undefined,
+      pricePerUnit: getPricePerUnit(),
+    });
 
-    try {
-      // Create order in database
-      const { data: order, error } = await supabase
-        .from('orders')
-        .insert({
-          user_id: user.id,
-          service_type: service.title,
-          platform: service.platform,
-          quantity,
-          target_url: targetUrl,
-          price_cents: Math.round(finalPrice * 100),
-          order_notes: orderNotes.trim() || null,
-        })
-        .select()
-        .single();
+    // Track add to cart event
+    trackAddToCart(service.title, service.platform, finalPrice);
 
-      if (error) throw error;
+    toast({
+      title: "Toegevoegd aan winkelwagen",
+      description: `${quantity.toLocaleString()} ${service.unit} voor ${service.title}`,
+    });
 
-      // Track purchase for analytics
-      trackPurchase({
-        orderId: order.id,
-        value: finalPrice,
-        currency: 'EUR',
-        items: [{
-          item_id: service.id,
-          item_name: service.title,
-          category: service.platform,
-          quantity: quantity,
-          price: getPricePerUnit(),
-        }],
-      });
-
-      // Call Stripe checkout edge function
-      const { data, error: functionError } = await supabase.functions.invoke('create-checkout-session', {
-        body: {
-          orderId: order.id,
-          amount: Math.round(finalPrice * 100),
-          currency: 'eur',
-          description: `${service.title} - ${quantity} ${service.unit}`,
-        },
-      });
-
-      if (functionError) throw functionError;
-
-      if (data?.sessionUrl) {
-        window.location.href = data.sessionUrl;
-      } else {
-        throw new Error('Kon geen checkout sessie aanmaken');
-      }
-    } catch (error) {
-      console.error('Order error:', error);
-      toast({
-        title: "Fout bij bestelling",
-        description: "Er is een fout opgetreden. Probeer het opnieuw.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    onClose();
   };
 
   return (
@@ -179,7 +122,7 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
         </CardHeader>
 
         <CardContent className="space-y-6">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleAddToCart} className="space-y-6">
             {/* Quantity Selection */}
             <div>
               <Label className="text-base font-semibold">Hoeveel {service.unit} wil je bestellen?</Label>
@@ -307,16 +250,16 @@ export default function OrderFlow({ service, user, onClose }: OrderFlowProps) {
               </Button>
               <Button
                 type="submit"
-                disabled={isLoading}
                 className="flex-1 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
               >
-                {isLoading ? "Wordt verwerkt..." : `Bestellen €${finalPrice.toFixed(2)}`}
+                <ShoppingCart size={16} className="mr-2" />
+                Toevoegen aan winkelwagen
               </Button>
             </div>
 
             {/* Security notice */}
             <p className="text-xs text-center text-muted-foreground">
-              🔒 Je wordt doorgestuurd naar een veilige betaalpagina
+              🛒 Item wordt toegevoegd aan je winkelwagen
             </p>
           </form>
         </CardContent>
