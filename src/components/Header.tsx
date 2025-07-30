@@ -58,6 +58,13 @@ const Header = () => {
     }
   };
 
+  const handleAuthModal = () => {
+    const currentPath = window.location.pathname;
+    setShowAuthModal(true);
+    // Store current path in localStorage for redirect after auth
+    localStorage.setItem('auth_redirect_path', currentPath);
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
   };
@@ -155,7 +162,7 @@ const Header = () => {
                 </Button>
               </div>
             ) : (
-              <Button variant="hero" size="sm" onClick={() => setShowAuthModal(true)}>
+              <Button variant="hero" size="sm" onClick={handleAuthModal}>
                 Inloggen
               </Button>
             )}
@@ -203,7 +210,7 @@ const Header = () => {
                   </Button>
                 </div>
               ) : (
-                <Button variant="hero" onClick={() => setShowAuthModal(true)} className="w-full">
+                <Button variant="hero" onClick={handleAuthModal} className="w-full">
                   Inloggen
                 </Button>
               )}
@@ -223,7 +230,10 @@ const Header = () => {
       </div>
       
       {showAuthModal && (
-        <AuthModal onClose={() => setShowAuthModal(false)} />
+        <AuthModal 
+          onClose={() => setShowAuthModal(false)} 
+          redirectPath={localStorage.getItem('auth_redirect_path') || undefined}
+        />
       )}
     </header>
   );

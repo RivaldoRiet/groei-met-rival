@@ -8,17 +8,33 @@ import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
 import { trackLead } from "@/lib/analytics";
 import { useToast } from "@/hooks/use-toast";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface AuthModalProps {
   onClose: () => void;
+  redirectPath?: string;
 }
 
-export default function AuthModal({ onClose }: AuthModalProps) {
+export default function AuthModal({ onClose, redirectPath }: AuthModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSuccessfulAuth = () => {
+    const targetPath = redirectPath || location.pathname || "/";
+    toast({
+      title: "Succesvol ingelogd",
+      description: "Welkom terug!",
+    });
+    onClose();
+    if (targetPath !== location.pathname) {
+      navigate(targetPath);
+    }
+  };
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,11 +56,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
 
       if (error) throw error;
 
-      toast({
-        title: "Succesvol ingelogd",
-        description: "Welkom terug!",
-      });
-      onClose();
+      handleSuccessfulAuth();
     } catch (error: any) {
       toast({
         title: "Inloggen mislukt",
@@ -101,7 +113,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
         title: "Account aangemaakt",
         description: "Je bent succesvol geregistreerd en ingelogd!",
       });
-      onClose();
+      handleSuccessfulAuth();
     } catch (error: any) {
       toast({
         title: "Registratie mislukt",
@@ -153,10 +165,10 @@ export default function AuthModal({ onClose }: AuthModalProps) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="signin" className="space-y-4">
+          <Tabs defaultValue="signup" className="space-y-4">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Inloggen</TabsTrigger>
               <TabsTrigger value="signup">Registreren</TabsTrigger>
+              <TabsTrigger value="signin">Inloggen</TabsTrigger>
             </TabsList>
             
             <TabsContent value="signin" className="space-y-4">
