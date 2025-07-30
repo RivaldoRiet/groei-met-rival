@@ -5,13 +5,49 @@ import { Badge } from '@/components/ui/badge';
 import { useCart } from '@/contexts/CartContext';
 import { ShoppingCart, Trash2, Plus, Minus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 export const CartSidebar = () => {
   const { items, removeFromCart, updateQuantity, getTotalPrice, getTotalItems } = useCart();
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const { toast } = useToast();
+
+  // Check user authentication status
+  React.useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handleCheckout = () => {
+    if (!user) {
+      toast({
+        title: "Inloggen vereist",
+        description: "Je moet ingelogd zijn om een bestelling te plaatsen.",
+        variant: "destructive",
+      });
+      setIsOpen(false);
+      return;
+    }
+
+    if (items.length === 0) {
+      toast({
+        title: "Winkelwagen leeg",
+        description: "Voeg eerst items toe aan je winkelwagen.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsOpen(false);
     navigate('/checkout');
   };
@@ -115,11 +151,20 @@ export const CartSidebar = () => {
           
           {items.length > 0 && (
             <div className="border-t pt-4 space-y-4">
+              {!user && (
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-sm">
+                  <p className="text-yellow-800 font-medium">Inloggen vereist voor checkout</p>
+                </div>
+              )}
               <div className="flex justify-between items-center">
                 <span className="font-semibold">Totaal:</span>
                 <span className="text-xl font-bold">€{getTotalPrice().toFixed(2)}</span>
               </div>
-              <Button onClick={handleCheckout} className="w-full">
+              <Button 
+                onClick={handleCheckout} 
+                className="w-full"
+                disabled={!user}
+              >
                 Naar Checkout
               </Button>
             </div>
