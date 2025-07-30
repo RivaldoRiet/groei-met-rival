@@ -23,6 +23,7 @@ import FAQ from "./pages/FAQ";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ReturnPolicy from "./pages/ReturnPolicy";
+import Checkout from "./pages/Checkout";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ const AppRoutes = () => {
       <Route path="/gebruiksvoorwaarden" element={<TermsOfService />} />
       <Route path="/privacybeleid" element={<PrivacyPolicy />} />
       <Route path="/retourbeleid" element={<ReturnPolicy />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import AuthModal from "./AuthModal";
+import { CartSidebar } from "./CartSidebar";
 import { Link } from "react-router-dom";
 import { ChevronDown, Menu, X, Instagram, Youtube, Music, Music2, Linkedin } from "lucide-react";
 import { getServicesByPlatform } from "@/data/services";
@@ -156,9 +157,9 @@ const Header = () => {
 
           {/* Right side actions */}
           <div className="hidden md:flex items-center space-x-4">
+            <CartSidebar />
             <div className="flex items-center space-x-2">
               <span className="text-sm text-muted-foreground">NL</span>
-              <span className="text-sm font-medium">€0,00</span>
             </div>
             
             {user ? (
@@ -202,8 +203,8 @@ const Header = () => {
             
             <div className="pt-4 border-t border-border mt-4">
               <div className="flex items-center justify-between mb-3">
+                <CartSidebar />
                 <span className="text-sm text-muted-foreground">NL</span>
-                <span className="text-sm font-medium">€0,00</span>
               </div>
               
               {user ? (
