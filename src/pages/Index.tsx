@@ -6,22 +6,19 @@ import AllPlatforms from "@/components/AllPlatforms";
 import Testimonials from "@/components/Testimonials";
 import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
-import { CartProvider } from "@/contexts/CartContext";
 
 const Index = () => {
   return (
-    <CartProvider>
-      <div className="min-h-screen bg-background">
-        <Header />
-        <Hero />
-        <Statistics />
-        <PopularServices />
-        <AllPlatforms />
-        <Testimonials />
-        <CallToAction />
-        <Footer />
-      </div>
-    </CartProvider>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <Hero />
+      <Statistics />
+      <PopularServices />
+      <AllPlatforms />
+      <Testimonials />
+      <CallToAction />
+      <Footer />
+    </div>
   );
 };
 
